@@ -190,7 +190,11 @@ Se você estiver usando um banco de dados PostgreSQL, pode gerenciá-lo com ferr
  - PGAdmin (que vem junto com o PostgreSQL)
  - DBeaver (uma ferramenta alternativa)
     
-Abra qualquer uma dessas ferramentas (Beekeeper, PGAdmin, ou DBeaver) e crie um banco de dados chamado softmarket ou o nome de sua preferência.
+Abra qualquer uma dessas ferramentas (Beekeeper, PGAdmin, ou DBeaver) e crie um banco de dados chamado softmarket ou o nome de sua preferência. O Arquivo com as informações para criação estão inseridos no:
+
+```
+db.txt
+```
 
 Após a criação, certifique-se de que a configuração do banco esteja correta no arquivo de configuração do seu projeto, como no config.py.
 
@@ -210,16 +214,172 @@ Após a criação, certifique-se de que a configuração do banco esteja correta
    * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
   ```
 
-6. **Acessar a API**  
+## Utilizando o Postman Para API
 
-  Com a aplicação rodando, você pode usar o Postman ou qualquer outro cliente HTTP para testar as rotas da API.
+Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades da api neste link:
 
-  Exemplo de chamadas de API:
+- [postman.com](https://www.postman.com)
 
-    - POST /produto: Cadastra um novo produto
+#### **POST/fornecedor**
+- **Descrição:** Registra um novo Fornecedor.
+  
+- **Corpo da Requisição:**
+- No Postman, selecione o método POST e insira a URL da rota:
+ ```
+ [http://127.0.0.1:5000/fornecedor]
+ ```
     
-    - GET /produto: Retorna todos os produtos cadastrados
+- Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
+- Cole o seguinte corpo da requisição:
     
-    - POST /fornecedor: Cadastra um fornecedor
+```
+{
+  "nome": "Fornecedor Y",
+  "cnpj": "00.000.000/0001-00",
+  "contato": "contato@fornecedor.com"
+}
+
+```
+- Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
+
+```
+"message": "Fornecedor cadastrado com sucesso!"
+```
+
+- O Método Get é necessário colocar o `fornecedor` no plural.
+
+- o Método DELETE é necessário colocar o `id` do fornecedor cadastrado:
+
+```
+[http://127.0.0.1:5000/fornecedor/<id>]
+```
+
+#### **POST/produto**
+- **Descrição:** Registra um novo produto.
+  
+- **Corpo da Requisição:**
+- No Postman, selecione o método POST e insira a URL da rota:
+ ```
+ [http://127.0.0.1:5000/produto]
+ ```
     
-    - GET /fornecedor: Retorna todos os fornecedores cadastrados
+- Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
+- Cole o seguinte corpo da requisição:
+    
+```
+  {
+    "nome": "Arroz",
+    "preco": 26.6,
+    "quantidade_em_estoque": 100,
+    "fornecedor_id": 1
+  }
+
+```
+- Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
+
+```
+{
+    "message": "Produto cadastrado com sucesso!"
+}
+```
+
+- **IMPORTANTE: o Produto só pode ser cadastrado se um fornecedor estiver cadastrado devido as restrições de chave no Banco de Dados (Não existe produto sem fornecedor)**
+
+- O Método Get é necessário colocar o `produto` no plural.
+
+- o Método DELETE é necessário colocar o `id` do produto cadastrado:
+
+```
+[http://127.0.0.1:5000/produto/<id>]
+```
+
+#### **POST/cliente**
+- **Descrição:** Registra um novo Cliente.
+  
+- **Corpo da Requisição:**
+- No Postman, selecione o método POST e insira a URL da rota:
+ ```
+ [http://127.0.0.1:5000/cliente]
+ ```
+    
+- Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
+- Cole o seguinte corpo da requisição:
+    
+```
+{
+    "nome": "Teste",
+    "cpf": 11122233346,
+    "email": "Teste@teste.com"
+}
+
+```
+- Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
+
+```
+  "message": "Cliente cadastrado com sucesso!"
+```
+
+- O Método Get é necessário colocar o `cliente` no plural.
+
+- o Método DELETE é necessário colocar o `id` do fornecedor cadastrado:
+
+```
+[http://127.0.0.1:5000/cliente/<id>]
+```
+
+#### **POST/pedidoEstoque**
+- **Descrição:** Registra um novo pedido para Estoque.
+  
+- **Corpo da Requisição:**
+- No Postman, selecione o método POST e insira a URL da rota:
+ ```
+ [http://127.0.0.1:5000/pedidoEstoque]
+ ```
+    
+- Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
+- Cole o seguinte corpo da requisição:
+    
+```
+{
+  "produto_id": 1,
+  "quantidade": 11,
+  "fornecedor_id": 2
+}
+
+```
+- Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
+
+```
+  "message": "Pedido de estoque realizado com sucesso!"
+```
+
+- **IMPORTANTE: o Pedido para Estoque só pode ser cadastrado se um fornecedor e um produto que ele forneceu estiver cadastrado, devido as restrições de chave no Banco de Dados (Não existe produto sem fornecedor, e não existe pedido para estoque sem produto)**
+
+  #### **POST/realizaCompra**
+- **Descrição:** Registra uma nova compra.
+  
+- **Corpo da Requisição:**
+- No Postman, selecione o método POST e insira a URL da rota:
+ ```
+ [http://127.0.0.1:5000/realizaCompra]
+ ```
+    
+- Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
+- Cole o seguinte corpo da requisição:
+    
+```
+    {
+        "cliente_id": 1,
+        "data":"2025-02-20",
+        "total": 22.80
+    }
+
+```
+- Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
+
+```
+  "message": "Compra realizada com sucesso!"
+```
+
+- **IMPORTANTE: a compra só pode ser cadastrada se um cliente  estiver cadastrado, devido as restrições de chave no Banco de Dados (Não existe produto vendido sem comprador!)**
+
