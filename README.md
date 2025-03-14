@@ -1,6 +1,6 @@
 ## 📌 softMarket - Sistema de Supermercado  📌
 
-Este é um projeto de sistema de supermercado, com foco na gestão de produtos, fornecedores e clientes. O sistema permitirá o gerenciamento de estoque, pedidos de fornecedores, e vendas realizadas pelos clientes.
+Este é um projeto de sistema de supermercado, com foco na gestão de produtos, fornecedores e clientes. O sistema permitirá o gerenciamento de estoque, pedidos de fornecedores e vendas realizadas no supermercado.
 
 ### 🔧 **Rotas da Aplicação**
 
