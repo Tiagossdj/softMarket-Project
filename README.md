@@ -215,10 +215,11 @@ Após a criação, certifique-se de que a configuração do banco esteja correta
   Com a aplicação rodando, você pode usar o Postman ou qualquer outro cliente HTTP para testar as rotas da API.
 
   Exemplo de chamadas de API:
-  
+
     - POST /produto: Cadastra um novo produto
+    
     - GET /produto: Retorna todos os produtos cadastrados
+    
     - POST /fornecedor: Cadastra um fornecedor
+    
     - GET /fornecedor: Retorna todos os fornecedores cadastrados
-
-
