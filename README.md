@@ -193,7 +193,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 - **Corpo da Requisição:**
 - No Postman, selecione o método POST e insira a URL da rota:
  ```
- [http://127.0.0.1:5000/fornecedor]
+ http://127.0.0.1:5000/fornecedor
  ```
     
 - Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
@@ -218,7 +218,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 - o Método DELETE é necessário colocar o `id` do fornecedor cadastrado:
 
 ```
-[http://127.0.0.1:5000/fornecedor/<id>]
+http://127.0.0.1:5000/fornecedor/<id>
 ```
 
 #### **POST/produto**
@@ -230,7 +230,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 
   
  ```
- [http://127.0.0.1:5000/produto]
+ http://127.0.0.1:5000/produto
  ```
     
 - Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
@@ -261,7 +261,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 - o Método DELETE é necessário colocar o `id` do produto cadastrado:
 
 ```
-[http://127.0.0.1:5000/produto/<id>]
+http://127.0.0.1:5000/produto/<id>
 ```
 
 
@@ -272,7 +272,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 - No Postman, selecione o método POST e insira a URL da rota:
   
  ```
- [http://127.0.0.1:5000/cliente]
+ http://127.0.0.1:5000/cliente
  ```
     
 - Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
@@ -298,7 +298,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 - o Método DELETE é necessário colocar o `id` do fornecedor cadastrado:
 
 ```
-[http://127.0.0.1:5000/cliente/<id>]
+http://127.0.0.1:5000/cliente/<id>
 ```
 
 #### **POST/pedidoEstoque**
@@ -309,7 +309,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 - No Postman, selecione o método POST e insira a URL da rota:
 
  ```
- [http://127.0.0.1:5000/pedidoEstoque]
+ http://127.0.0.1:5000/pedidoEstoque
  ```
     
 - Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
@@ -339,7 +339,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 - No Postman, selecione o método POST e insira a URL da rota:
   
  ```
- [http://127.0.0.1:5000/realizaCompra]
+ http://127.0.0.1:5000/realizaCompra
  ```
     
 - Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
