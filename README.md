@@ -20,10 +20,12 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 ```
 
 - **GET /produto**
-  Obtém a lista de produtos cadastrados no sistema.
+
+- Obtém a lista de produtos cadastrados no sistema.
 
 - **DELETE /produto/{id}**
-  Exclui um produto do sistema, se não estiver em um pedido de estoque.
+
+- Exclui um produto do sistema, se não estiver em um pedido de estoque.
 
 - **POST /fornecedor**  
   Cadastra um novo Fornecedor no sistema.
@@ -40,12 +42,15 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 ```
 
 - **GET /fornecedores**
-  Obtém a lista de fornecedores cadastrados no sistema.
+
+- Obtém a lista de fornecedores cadastrados no sistema.
 
 - **DELETE /fornecedor/{id}**
-  Exclui um fornecedor do sistema, caso não esteja associado a produtos ou pedidos de estoque.
+
+- Exclui um fornecedor do sistema, caso não esteja associado a produtos ou pedidos de estoque.
 
 - **POST /cliente**  
+
   Cadastra um novo cliente no sistema.
   
   Corpo da requisição:
@@ -60,15 +65,19 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 ```
 
 - **GET /clientes**
+
   Obtém a lista de clientes cadastrados no sistema.
 
 - **DELETE /cliente/{id}**
+
   Exclui um cliente do sistema.
 
 - **POST /pedidoEstoque**
+
   Descrição: Realiza um pedido de estoque para reposição de produtos.
 
 - **POST /realizaCompra**
+
   Descrição: Realiza a compra de um produto, alterando o estoque.
  
 
@@ -78,7 +87,7 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 
 
 
-### 🔐 **Funcionalidades**
+###  **Funcionalidades**
 
 - Cadastro de produtos, fornecedores e clientes.
 - Controle de estoque, com quantidade disponível e reposição por pedidos de estoque.
@@ -86,7 +95,7 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 
 ### Tecnologias Utilizadas
 
-* [Python](Flask , SQLAlchemy(ORM)) (https://www.python.org/)
+* [Python](https://www.python.org/)
 * [beeKeeper](https://www.beekeeperstudio.io/)
 * [postgreSQL](https://www.postgresql.org/)
 
@@ -101,6 +110,8 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 
 
 
+
+
 ## Como rodar o projeto ✅
 
 Para rodar a aplicação, siga os passos abaixo:
@@ -111,14 +122,12 @@ Para rodar a aplicação, siga os passos abaixo:
    
  ```
   git clone git@github.com:Tiagossdj/softMarket-Project.git
-
  ```
 
 Em seguida, entre no diretório do projeto:
 
  ```
   cd softMarket-project
-
  ```
   
  2. **Criar um Ambiente Virtual (opcional, mas recomendado)**
@@ -129,7 +138,6 @@ Em seguida, entre no diretório do projeto:
   
   ```
   python3 -m venv venv
-
   ```
 
   Ative o ambiente virtual:
@@ -138,50 +146,54 @@ Em seguida, entre no diretório do projeto:
 
   ```
   venv\Scripts\activate
-
   ```
 
 - No macOS/Linux:
 
-  ```
-  source venv/bin/activate
-
-  ```
+ ```
+ source venv/bin/activate
+ ```
 
 
 3. **Instalar Dependências**
 
-    Com o ambiente virtual ativo, instale as dependências necessárias:
+ Com o ambiente virtual ativo, instale as dependências necessárias:
 
   ```
   pip install -r requirements.txt
-
   ```
 
   Isso instalará o Flask, Flask-SQLAlchemy, psycopg2, entre outras dependências.
 
+  
+
 4. **Configurar o Banco de Dados**
 
+
   Se você ainda não tem um banco de dados PostgreSQL rodando, você pode configurá-lo da seguinte forma:
+  
   - Instalar o PostgreSQL:
 
-  No Windows, baixe e instale pelo site oficial: https://www.postgresql.org/download/
+  No Windows, baixe e instale pelo site oficial: https://www.postgresql.org/download/.
+  
   No macOS, você pode usar o Homebrew:
 
    ```
   brew install postgresql
-
    ```
+
+
   - Configurar o Banco de Dados:
 
-    Se você estiver usando um banco de dados PostgreSQL, pode gerenciá-lo com ferramentas como:
-    - Beekeeper (Utilizado neste projeto)
-    - PGAdmin (que vem junto com o PostgreSQL)
-    - DBeaver (uma ferramenta alternativa)
+Se você estiver usando um banco de dados PostgreSQL, pode gerenciá-lo com ferramentas como:
+ - Beekeeper (Utilizado neste projeto)
+ - PGAdmin (que vem junto com o PostgreSQL)
+ - DBeaver (uma ferramenta alternativa)
     
-    Abra qualquer uma dessas ferramentas (Beekeeper, PGAdmin, ou DBeaver) e crie um banco de dados chamado softmarket ou o nome de sua preferência.
+Abra qualquer uma dessas ferramentas (Beekeeper, PGAdmin, ou DBeaver) e crie um banco de dados chamado softmarket ou o nome de sua preferência.
 
-    Após a criação, certifique-se de que a configuração do banco esteja correta no arquivo de configuração do seu projeto, como no config.py.
+Após a criação, certifique-se de que a configuração do banco esteja correta no arquivo de configuração do seu projeto, como no config.py.
+
 
 5. **Rodar a aplicação**
 
@@ -189,7 +201,6 @@ Em seguida, entre no diretório do projeto:
 
    ```
     python app.py
-
    ```
 
 
@@ -197,14 +208,14 @@ Em seguida, entre no diretório do projeto:
 
   ```
    * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-
-
   ```
+
 6. **Acessar a API**  
 
   Com a aplicação rodando, você pode usar o Postman ou qualquer outro cliente HTTP para testar as rotas da API.
 
   Exemplo de chamadas de API:
+  
     - POST /produto: Cadastra um novo produto
     - GET /produto: Retorna todos os produtos cadastrados
     - POST /fornecedor: Cadastra um fornecedor
