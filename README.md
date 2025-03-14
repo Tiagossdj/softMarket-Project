@@ -6,63 +6,30 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 
 - **POST /produto**  
   Cadastra um novo produto no sistema.
-  
-  Corpo da requisição:
-
-```
-{
-  "nome": "Produto X",
-  "preco": 10.50,
-  "quantidade_em_estoque": 100,
-  "fornecedor_id": 1
-}
-
-```
 
 - **GET /produto**
 
-- Obtém a lista de produtos cadastrados no sistema.
+ Obtém a lista de produtos cadastrados no sistema.
 
 - **DELETE /produto/{id}**
 
-- Exclui um produto do sistema, se não estiver em um pedido de estoque.
+ Exclui um produto do sistema, se não estiver em um pedido de estoque.
 
-- **POST /fornecedor**  
+- **POST /fornecedor**
+
   Cadastra um novo Fornecedor no sistema.
-  
-  Corpo da requisição:
-
-```
-{
-  "nome": "Fornecedor Y",
-  "cnpj": "00.000.000/0001-00",
-  "contato": "contato@fornecedor.com"
-}
-
-```
-
+ 
 - **GET /fornecedores**
 
-- Obtém a lista de fornecedores cadastrados no sistema.
+   Obtém a lista de fornecedores cadastrados no sistema.
 
 - **DELETE /fornecedor/{id}**
 
-- Exclui um fornecedor do sistema, caso não esteja associado a produtos ou pedidos de estoque.
+   Exclui um fornecedor do sistema, caso não esteja associado a produtos ou pedidos de estoque.
 
-- **POST /cliente**  
+- **POST /cliente**
 
   Cadastra um novo cliente no sistema.
-  
-  Corpo da requisição:
-
-```
-{
-  "nome": "Cliente A",
-  "cpf": "123.456.789-00",
-  "email": "cliente@dominio.com"
-}
-
-```
 
 - **GET /clientes**
 
