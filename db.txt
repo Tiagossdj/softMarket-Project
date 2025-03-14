@@ -1,0 +1,44 @@
+-- Banco de Dados para Teste de API.
+
+CREATE TABLE fornecedor (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cnpj VARCHAR(14) NOT NULL UNIQUE,
+    contato VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE produto (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    preco FLOAT NOT NULL,
+    quantidade_em_estoque INT NOT NULL,
+    fornecedor_id INT NOT NULL,
+    CONSTRAINT fk_fornecedor FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(id)
+);
+
+CREATE TABLE cliente (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) NOT NULL UNIQUE,
+    email VARCHAR(120) NOT NULL UNIQUE
+);
+
+CREATE TABLE compra (
+    id SERIAL PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    data TIMESTAMP NOT NULL,
+    total FLOAT NOT NULL,
+    CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES cliente(id)
+);
+
+CREATE TABLE pedido_estoque (
+    id SERIAL PRIMARY KEY,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL,
+    fornecedor_id INT NOT NULL,
+    CONSTRAINT fk_produto FOREIGN KEY (produto_id) REFERENCES produto(id),
+    CONSTRAINT fk_fornecedor_pedido FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(id)
+);
+
+
+
