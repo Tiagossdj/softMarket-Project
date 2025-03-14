@@ -255,10 +255,13 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 ```
 
 #### **POST/produto**
-- **Descrição:** Registra um novo produto.
+ **Descrição:** Registra um novo produto.
   
 - **Corpo da Requisição:**
+  
 - No Postman, selecione o método POST e insira a URL da rota:
+
+  
  ```
  [http://127.0.0.1:5000/produto]
  ```
@@ -276,6 +279,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 
 ```
 - Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
+  
 
 ```
 {
@@ -293,11 +297,13 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 [http://127.0.0.1:5000/produto/<id>]
 ```
 
+
 #### **POST/cliente**
-- **Descrição:** Registra um novo Cliente.
+**Descrição:** Registra um novo Cliente.
   
 - **Corpo da Requisição:**
 - No Postman, selecione o método POST e insira a URL da rota:
+  
  ```
  [http://127.0.0.1:5000/cliente]
  ```
@@ -313,6 +319,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 }
 
 ```
+
 - Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
 
 ```
@@ -328,10 +335,12 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 ```
 
 #### **POST/pedidoEstoque**
-- **Descrição:** Registra um novo pedido para Estoque.
+**Descrição:** Registra um novo pedido para Estoque.
+
   
 - **Corpo da Requisição:**
 - No Postman, selecione o método POST e insira a URL da rota:
+
  ```
  [http://127.0.0.1:5000/pedidoEstoque]
  ```
@@ -345,8 +354,8 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
   "quantidade": 11,
   "fornecedor_id": 2
 }
-
 ```
+
 - Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
 
 ```
@@ -355,11 +364,13 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 
 - **IMPORTANTE: o Pedido para Estoque só pode ser cadastrado se um fornecedor e um produto que ele forneceu estiver cadastrado, devido as restrições de chave no Banco de Dados (Não existe produto sem fornecedor, e não existe pedido para estoque sem produto)**
 
-  #### **POST/realizaCompra**
-- **Descrição:** Registra uma nova compra.
+#### **POST/realizaCompra**
+**Descrição:** Registra uma nova compra.
+
   
 - **Corpo da Requisição:**
 - No Postman, selecione o método POST e insira a URL da rota:
+  
  ```
  [http://127.0.0.1:5000/realizaCompra]
  ```
@@ -373,8 +384,8 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
         "data":"2025-02-20",
         "total": 22.80
     }
-
 ```
+
 - Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
 
 ```
