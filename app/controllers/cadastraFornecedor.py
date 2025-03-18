@@ -2,12 +2,12 @@ from flask import Blueprint, request, jsonify
 from app.modelo_db import db, Fornecedor
 
 # Define o Blueprint
-cadastrar_fornecedor = Blueprint("cadastrar_fornecedor", __name__)
+fornecedor_route = Blueprint("fornecedor_route", __name__)
 
 
 # Cadastrar fornecedor
-@cadastrar_fornecedor.route("/fornecedor", methods=["POST"])
-def cadastrar_fornecedor_func():
+@fornecedor_route.route("/fornecedor", methods=["POST"])
+def fornecedor_route_func():
     try:
         dados = request.get_json()
         nome = dados.get("nome")
@@ -34,7 +34,7 @@ def cadastrar_fornecedor_func():
 
 
 # Excluir fornecedor
-@cadastrar_fornecedor.route("/fornecedor/<int:id>", methods=["DELETE"])
+@fornecedor_route.route("/fornecedor/<int:id>", methods=["DELETE"])
 def excluir_fornecedor(id):
     fornecedor = Fornecedor.query.get(id)
     if fornecedor is None:
@@ -58,7 +58,7 @@ def excluir_fornecedor(id):
 
 
 # Rota para listar fornecedores
-@cadastrar_fornecedor.route("/fornecedores", methods=["GET"])
+@fornecedor_route.route("/fornecedores", methods=["GET"])
 def get_fornecedores():
     fornecedores = Fornecedor.query.all()  # Obtém todos os fornecedores
     if not fornecedores:
@@ -74,5 +74,21 @@ def get_fornecedores():
         }
         for fornecedor in fornecedores
     ]
+
+    return jsonify(resultado), 200
+
+
+@fornecedor_route.route("/fornecedor/<int:id>", methods=["GET"])
+def get_fornecedor_por_id(id):
+    fornecedor = Fornecedor.query.get(id)  # Busca o fornecedor pelo ID
+    if not fornecedor:
+        return jsonify({"mensagem": "Fornecedor não encontrado."}), 404
+
+    resultado = {
+        "id": fornecedor.id,
+        "nome": fornecedor.nome,
+        "cnpj": fornecedor.cnpj,
+        "contato": fornecedor.contato,
+    }
 
     return jsonify(resultado), 200
