@@ -10,16 +10,17 @@ def create_app():
     db.init_app(app)
 
     # Registra os blueprints
-    from app.controllers.cadastraCliente import cadastrar_cliente
-    from app.controllers.cadastraProduto import cadastrar_produto
-    from app.controllers.cadastraFornecedor import cadastrar_fornecedor
+
+    from app.controllers.cadastraProduto import produto_route
+    from app.controllers.cadastraFornecedor import fornecedor_route
     from app.controllers.pedidoEstoque import pedido_estoque
     from app.controllers.realizaCompra import realiza_compra
+    from app.controllers.relatórios import relatorio_route
 
-    app.register_blueprint(cadastrar_cliente)
-    app.register_blueprint(cadastrar_produto)
-    app.register_blueprint(cadastrar_fornecedor)
+    app.register_blueprint(produto_route)
+    app.register_blueprint(fornecedor_route)
     app.register_blueprint(pedido_estoque)
     app.register_blueprint(realiza_compra)
+    app.register_blueprint(relatorio_route)
 
     return app
