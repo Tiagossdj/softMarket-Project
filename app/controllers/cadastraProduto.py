@@ -66,3 +66,20 @@ def listar_produtos():
         for produto in produtos
     ]
     return jsonify(lista_produtos), 200
+
+
+# rota para buscar um produto pelo id
+@cadastrar_produto.route("/produto/<int:id>", methods=["GET"])
+def obter_produto_por_id(id):
+    produto = Produto.query.get(id)  # Busca o produto pelo ID
+    if not produto:
+        return jsonify({"mensagem": "Produto não encontrado"}), 404
+
+    produto_data = {
+        "id": produto.id,
+        "nome": produto.nome,
+        "preco": produto.preco,
+        "quantidade_em_estoque": produto.quantidade_em_estoque,
+        "fornecedor_id": produto.fornecedor_id,
+    }
+    return jsonify(produto_data), 200
