@@ -1,13 +1,13 @@
--- Banco de Dados para Teste de API.
+-- Banco de Dados para Teste de API
 
-CREATE TABLE fornecedor (
+CREATE TABLE IF NOT EXISTS fornecedor (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     cnpj VARCHAR(14) NOT NULL UNIQUE,
     contato VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE produto (
+CREATE TABLE IF NOT EXISTS produto (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     preco FLOAT NOT NULL,
@@ -16,22 +16,15 @@ CREATE TABLE produto (
     CONSTRAINT fk_fornecedor FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(id)
 );
 
-CREATE TABLE cliente (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) NOT NULL UNIQUE,
-    email VARCHAR(120) NOT NULL UNIQUE
-);
+-- TABELA CLIENTE REMOVIDA
 
-CREATE TABLE compra (
+CREATE TABLE IF NOT EXISTS compra (
     id SERIAL PRIMARY KEY,
-    cliente_id INT NOT NULL,
     data TIMESTAMP NOT NULL,
-    total FLOAT NOT NULL,
-    CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES cliente(id)
+    total FLOAT NOT NULL
 );
 
-CREATE TABLE pedido_estoque (
+CREATE TABLE IF NOT EXISTS pedido_estoque (
     id SERIAL PRIMARY KEY,
     produto_id INT NOT NULL,
     quantidade INT NOT NULL,
@@ -40,5 +33,13 @@ CREATE TABLE pedido_estoque (
     CONSTRAINT fk_fornecedor_pedido FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(id)
 );
 
-
-
+CREATE TABLE IF NOT EXISTS item_compra (
+    id SERIAL PRIMARY KEY,
+    compra_id INT,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL,
+    preco_unitario FLOAT NOT NULL,
+    subtotal FLOAT NOT NULL,
+    CONSTRAINT fk_compra FOREIGN KEY (compra_id) REFERENCES compra(id),
+    CONSTRAINT fk_produto_item FOREIGN KEY (produto_id) REFERENCES produto(id)
+);
