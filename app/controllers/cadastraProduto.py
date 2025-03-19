@@ -13,6 +13,7 @@ def cadastrar_produto():
         nome = data["nome"]
         preco = data["preco"]
         quantidade_em_estoque = data["quantidade_em_estoque"]
+        estoque_minimo = data["estoque_minimo"]
         fornecedor_id = data.get("fornecedor_id")
 
         # Verificação de quantidade em estoque válida
@@ -29,6 +30,7 @@ def cadastrar_produto():
             nome=nome,
             preco=preco,
             quantidade_em_estoque=quantidade_em_estoque,
+            estoque_minimo=estoque_minimo,
             fornecedor_id=fornecedor_id,
         )
         db.session.add(produto)

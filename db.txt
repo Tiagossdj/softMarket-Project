@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS produto (
     nome VARCHAR(100) NOT NULL,
     preco FLOAT NOT NULL,
     quantidade_em_estoque INT NOT NULL,
+    estoque_minimo INT NOT NULL, 
     fornecedor_id INT NOT NULL,
     CONSTRAINT fk_fornecedor FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(id)
 );
@@ -43,3 +44,58 @@ CREATE TABLE IF NOT EXISTS item_compra (
     CONSTRAINT fk_compra FOREIGN KEY (compra_id) REFERENCES compra(id),
     CONSTRAINT fk_produto_item FOREIGN KEY (produto_id) REFERENCES produto(id)
 );
+
+--------------------------------------------------------------------------------
+
+Popular Banco de Dados (Para os testes)
+
+-- Inserindo fornecedores
+INSERT INTO fornecedor (nome, cnpj, contato) VALUES 
+('Fornecedor A', '12345678000199', 'contato@fornecedora.com'),
+('Fornecedor B', '98765432000188', 'suporte@fornecedorb.com');
+
+-- Inserindo produtos
+INSERT INTO produto (nome, preco, quantidade_em_estoque, fornecedor_id, estoque_minimo) VALUES 
+('Arroz', 10.99, 100, 1, 30),
+('Feijão', 8.99, 200, 2, 30),
+('Macarrão', 4.99, 15, 1, 30),
+('Óleo de Soja', 6.49, 50, 2, 30),
+('Açúcar', 3.99, 120, 1, 30);
+
+-- Inserindo pedidos de estoque
+INSERT INTO pedido_estoque (produto_id, quantidade, fornecedor_id, data_pedido) VALUES 
+(1, 50, 1, '2025-03-19 08:30:00'),
+(2, 100, 2, '2025-03-19 09:00:00'),
+(3, 75, 1, '2025-03-19 10:15:00'),
+(4, 30, 2, '2025-03-19 11:00:00'),
+(5, 60, 1, '2025-03-19 12:30:00');
+
+-- Inserindo compras
+INSERT INTO compra (data, total) VALUES 
+('2025-03-19 10:00:00', 150.00),
+('2025-03-19 11:30:00', 300.00);
+
+-- Inserindo itens de compra
+INSERT INTO item_compra (compra_id, produto_id, quantidade, preco_unitario, subtotal) VALUES 
+(1, 1, 5, 19.99, 99.95),
+(1, 2, 2, 49.99, 99.98),
+(2, 3, 3, 29.99, 89.97);
+
+
+------------------------------------------------------------------------------------
+
+-- Para caso precise resetar os ID's
+-- Resetando a sequência do campo SERIAL para a tabela produto
+SELECT setval('produto_id_seq', (SELECT MAX(id) FROM produto));
+
+-- Resetando a sequência do campo SERIAL para a tabela fornecedor
+SELECT setval('fornecedor_id_seq', (SELECT MAX(id) FROM fornecedor));
+
+-- Resetando a sequência do campo SERIAL para a tabela pedido_estoque
+SELECT setval('pedido_estoque_id_seq', (SELECT MAX(id) FROM pedido_estoque));
+
+-- Resetando a sequência do campo SERIAL para a tabela compra
+SELECT setval('compra_id_seq', (SELECT MAX(id) FROM compra));
+
+-- Resetando a sequência do campo SERIAL para a tabela item_compra
+SELECT setval('item_compra_id_seq', (SELECT MAX(id) FROM item_compra));

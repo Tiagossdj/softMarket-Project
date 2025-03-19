@@ -2,7 +2,6 @@ from app.modelo_db import db
 
 
 def test_cadastrar_produto(client):
-    # Primeiro, crie um fornecedor de teste
     with client.application.app_context():
         # Importe o modelo de Fornecedor
         from app.modelo_db import Fornecedor
@@ -13,7 +12,6 @@ def test_cadastrar_produto(client):
         )
         db.session.add(fornecedor)
         db.session.commit()
-        # Obtenha o ID do fornecedor criado
         fornecedor_id = fornecedor.id
 
     # Dados para o cadastro do produto
@@ -21,7 +19,8 @@ def test_cadastrar_produto(client):
         "nome": "Produto Teste",
         "preco": 100.0,
         "quantidade_em_estoque": 50,
-        "fornecedor_id": fornecedor_id,  # Use o ID do fornecedor criado
+        "fornecedor_id": fornecedor_id,
+        "estoque_minimo": 23,
     }
 
     # Realizando a requisição para cadastrar o produto
@@ -52,6 +51,7 @@ def test_excluir_produto(client):
             nome="Produto Teste",
             preco=100.0,
             quantidade_em_estoque=50,
+            estoque_minimo=40,
             fornecedor_id=fornecedor.id,
         )
         db.session.add(produto)
@@ -81,12 +81,14 @@ def test_listar_produtos(client):
             nome="Produto 1",
             preco=50.0,
             quantidade_em_estoque=10,
+            estoque_minimo=40,
             fornecedor_id=fornecedor.id,
         )
         produto2 = Produto(
             nome="Produto 2",
             preco=30.0,
             quantidade_em_estoque=5,
+            estoque_minimo=40,
             fornecedor_id=fornecedor.id,
         )
         db.session.add_all([produto1, produto2])
@@ -115,6 +117,7 @@ def test_obter_produto_por_id(client):
             nome="Produto Teste",
             preco=100.0,
             quantidade_em_estoque=50,
+            estoque_minimo=40,
             fornecedor_id=fornecedor.id,
         )
         db.session.add(produto)
@@ -145,6 +148,7 @@ def test_atualizar_estoque_produto(client):
             nome="Produto Teste",
             preco=100.0,
             quantidade_em_estoque=50,
+            estoque_minimo=40,
             fornecedor_id=fornecedor.id,
         )
         db.session.add(produto)
@@ -177,6 +181,7 @@ def test_atualizar_produto(client):
             nome="Produto Teste",
             preco=100.0,
             quantidade_em_estoque=50,
+            estoque_minimo=40,
             fornecedor_id=fornecedor.id,
         )
         db.session.add(produto)

@@ -9,6 +9,7 @@ class Produto(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     preco = db.Column(db.Float, nullable=False)
     quantidade_em_estoque = db.Column(db.Integer, nullable=False)
+    estoque_minimo = db.Column(db.Integer, nullable=False)  # controle de estoque mínimo
     fornecedor_id = db.Column(
         db.Integer, db.ForeignKey("fornecedor.id"), nullable=False
     )
@@ -16,7 +17,6 @@ class Produto(db.Model):
     fornecedor = db.relationship("Fornecedor", back_populates="produtos")
     pedidos_estoque = db.relationship("PedidoEstoque", back_populates="produto")
 
-    # Relacionamento correto com ItemCompra
     itens = db.relationship("ItemCompra", back_populates="produto", lazy=True)
 
 
@@ -38,6 +38,9 @@ class Compra(db.Model):
     itens = db.relationship("ItemCompra", back_populates="compra")
 
 
+from datetime import datetime
+
+
 class PedidoEstoque(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     produto_id = db.Column(db.Integer, db.ForeignKey("produto.id"), nullable=False)
@@ -45,7 +48,7 @@ class PedidoEstoque(db.Model):
     fornecedor_id = db.Column(
         db.Integer, db.ForeignKey("fornecedor.id"), nullable=False
     )
-
+    data_pedido = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     produto = db.relationship("Produto", back_populates="pedidos_estoque", lazy=True)
     fornecedor = db.relationship(
         "Fornecedor", back_populates="pedidos_estoque", lazy=True
