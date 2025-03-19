@@ -40,12 +40,14 @@ def client(request):
                 nome="Produto Estoque 1",
                 preco=10.0,
                 quantidade_em_estoque=50,
+                estoque_minimo=36,
                 fornecedor_id=fornecedor.id,
             )
             produto2 = Produto(
                 nome="Produto Estoque 2",
                 preco=20.0,
                 quantidade_em_estoque=30,
+                estoque_minimo=35,
                 fornecedor_id=fornecedor.id,
             )
 
@@ -54,6 +56,7 @@ def client(request):
                 nome="Produto Estoque Baixo",
                 preco=5.0,
                 quantidade_em_estoque=10,  # Estoque baixo
+                estoque_minimo=34,
                 fornecedor_id=fornecedor.id,
             )
 
@@ -71,7 +74,7 @@ def client(request):
             # Criação de fornecedor e produtos apenas para os testes de compra
             fornecedor = Fornecedor(
                 nome="Fornecedor Teste Compra",
-                cnpj="12345678000195",
+                cnpj="1234967800019",
                 contato="compra@teste.com",
             )
             db.session.add(fornecedor)
@@ -82,12 +85,14 @@ def client(request):
                 nome="Produto Compra 1",
                 preco=15.0,
                 quantidade_em_estoque=100,
+                estoque_minimo=33,
                 fornecedor_id=fornecedor.id,
             )
             produto2 = Produto(
                 nome="Produto Compra 2",
                 preco=25.0,
                 quantidade_em_estoque=100,
+                estoque_minimo=32,
                 fornecedor_id=fornecedor.id,
             )
             db.session.add(produto1)
