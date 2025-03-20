@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - SoftMarket</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="relatorios.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-boxes"></i>
+                SoftMarket
+            </a>
+            <nav class="nav-links">
+                <a href="#">Dashboard</a>
+                <a href="#">Produtos</a>
+                <a href="#">Estoque</a>
+                <a href="#">Vendas</a>
+                <a href="#">Fornecedores</a>
+                <a href="#" class="active">Relatórios</a>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary">
+                    <i class="fas fa-file-export"></i> Exportar Relatório
+                </button>
+                <div class="user-profile">
+                    <div class="avatar">JD</div>
+                    <span>João</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="page-content">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Relatórios</h1>
+                    <div class="breadcrumb">
+                        <a href="#">Dashboard</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Relatórios</span>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="row">
+                    <!-- Coluna Esquerda - Filtros e configurações do relatório -->
+                    <div class="col col-left">
+                        <div class="card">
+                            <h2>Configurações do Relatório</h2>
+                            <form id="reportConfigForm">
+                                <div class="form-group">
+                                    <label for="reportType">Tipo de Relatório*</label>
+                                    <select id="reportType" name="reportType" required>
+                                        <option value="">Selecione o tipo de relatório</option>
+                                        <option value="vendas">Vendas no Período</option>
+                                        <option value="estoqueBaixo">Produtos com Estoque Baixo</option>
+                                        <option value="produtosVendidos">Produtos Mais Vendidos</option>
+                                        <option value="vendasDiarias">Vendas Diárias</option>
+                                        <option value="faturamento">Faturamento por Categoria</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group date-range">
+                                    <label>Período*</label>
+                                    <div class="date-inputs">
+                                        <div class="date-field">
+                                            <label for="dataInicio">De</label>
+                                            <input type="date" id="dataInicio" name="dataInicio" required>
+                                        </div>
+                                        <div class="date-field">
+                                            <label for="dataFim">Até</label>
+                                            <input type="date" id="dataFim" name="dataFim" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="chartType">Tipo de Gráfico</label>
+                                    <select id="chartType" name="chartType">
+                                        <option value="barra">Gráfico de Barras</option>
+                                        <option value="linha">Gráfico de Linha</option>
+                                        <option value="pizza">Gráfico de Pizza</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary btn-generate">
+                                        <i class="fas fa-chart-bar"></i> Gerar Relatório
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Coluna Direita - Visualização dos dados e gráficos -->
+                    <div class="col col-right">
+                        <!-- Visualização dos dados em tabela -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Dados do Relatório</h2>
+                                <button class="btn btn-sm btn-export">
+                                    <i class="fas fa-file-excel"></i> Exportar Excel
+                                </button>
+                            </div>
+                            <div class="report-data">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor Unitário</th>
+                                            <th>Total Vendido</th>
+                                            <th>Data</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Arroz 5kg</td>
+                                            <td>50</td>
+                                            <td>R$ 20,00</td>
+                                            <td>R$ 1.000,00</td>
+                                            <td>15/03/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Feijão 1kg</td>
+                                            <td>75</td>
+                                            <td>R$ 8,00</td>
+                                            <td>R$ 600,00</td>
+                                            <td>15/03/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Açúcar 2kg</td>
+                                            <td>35</td>
+                                            <td>R$ 10,00</td>
+                                            <td>R$ 350,00</td>
+                                            <td>16/03/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Óleo 900ml</td>
+                                            <td>60</td>
+                                            <td>R$ 9,50</td>
+                                            <td>R$ 570,00</td>
+                                            <td>16/03/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Café 500g</td>
+                                            <td>45</td>
+                                            <td>R$ 15,00</td>
+                                            <td>R$ 675,00</td>
+                                            <td>17/03/2025</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                                            <td colspan="2"><strong>R$ 3.195,00</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Visualização do gráfico -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Visualização Gráfica</h2>
+                                <button class="btn btn-sm btn-export">
+                                    <i class="fas fa-image"></i> Exportar Gráfico
+                                </button>
+                            </div>
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-chart-bar chart-icon"></i>
+                                    <p>Gráfico de Barras - Produtos Mais Vendidos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
