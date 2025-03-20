@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque - SoftMarket</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estoque.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-boxes"></i>
+                SoftMarket
+            </a>
+            <nav class="nav-links">
+                <a href="#">Dashboard</a>
+                <a href="#">Produtos</a>
+                <a href="#" class="active">Estoque</a>
+                <a href="#">Fornecedores</a>
+                <a href="#">Vendas</a>
+                <a href="#">Relatórios</a>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Novo Produto
+                </button>
+                <div class="user-profile">
+                    <div class="avatar">JD</div>
+                    <span>João</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="page-content">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Controle de Estoque</h1>
+                    <div class="breadcrumb">
+                        <a href="#">Dashboard</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="#">Estoque</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Gerenciar Estoque</span>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+
+                <!-- Card: Visualizar Produto Específico -->
+                <div class="card">
+                    <form id="visualizarProdutoForm">
+                        <div class="form-group">
+                            <label for="produtoVisualizar">Produto*</label>
+                            <input type="text" id="produtoVisualizar" name="produtoVisualizar" required placeholder="Buscar Produto para Visualizar">
+                        </div>
+                        <button type="submit" class="btn btn-info">Visualizar Produto</button>
+                    </form>
+                </div>
+
+                <!-- Card: Tabela de Produtos no Estoque -->
+                <div class="card">
+                    <h2>Produtos no Estoque</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome do Produto</th>
+                                <th>Quantidade em Estoque</th>
+                                <th>Alerta de Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="low-stock">
+                                <td>Arroz 5kg</td>
+                                <td>50</td>
+                                <td class="alert">Abaixo do Estoque Mínimo</td>
+                                <td class="actions">
+                                    <button class="edit-btn">Editar</button>
+                                    <button class="delete-btn">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Feijão 1kg</td>
+                                <td>100</td>
+                                <td class="ok">Estoque OK</td>
+                                <td class="actions">
+                                    <button class="edit-btn">Editar</button>
+                                    <button class="delete-btn">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr class="low-stock">
+                                <td>Açúcar 5kg</td>
+                                <td>5</td>
+                                <td class="alert">Abaixo do Estoque Mínimo</td>
+                                <td class="actions">
+                                    <button class="edit-btn">Editar</button>
+                                    <button class="delete-btn">Excluir</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Botão de Atualizar Estoque -->
+                <div class="update-stock">
+                    <button class="btn btn-warning">
+                        <i class="fas fa-sync-alt"></i> Atualizar Estoque
+                    </button>
+                </div>
+
+            </div> <!-- fim main-content -->
+
+        </div> <!-- fim page-content -->
+    </div> <!-- fim container -->
+
+</body>
+</html>
