@@ -181,28 +181,6 @@ header {
 }
 
 
-/* Main Content (Fornecedor Card) */
-.main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.card {
-  background-color: var(--background);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: var(--card-shadow);
-}
-
-h1 {
-  color: var(--text-color);
-  margin-top: 0;
-  font-size: 20px;
-}
-
 /* Form */
 .form-group {
   margin-bottom: 15px;
@@ -329,9 +307,8 @@ h1 {
   color: var(--text-color);
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 25px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 0px; 
+  padding-bottom: 0;   
 }
 
 .form-group {
