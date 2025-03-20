@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">    
+</head>
+<body>
+  <!-- Header -->
+  <header>
+      <div class="container header-content">
+          <a href="#" class="logo">
+              <i class="fas fa-boxes"></i>
+              SoftMarket
+          </a>
+          <nav class="nav-links">
+              <a href="#">Dashboard</a>
+              <a href="#">Produtos</a>
+              <a href="#">Estoque</a>
+              <a href="#">Vendas</a>
+              <a href="#">Relatórios</a>
+          </nav>
+          <div class="user-actions">
+              <button class="btn btn-primary">
+                  <i class="fas fa-plus"></i> Novo Produto
+              </button>
+              <div class="user-profile">
+                  <div class="avatar">JD</div>
+                  <span>João</span>
+              </div>
+          </div>
+      </div>
+  </header>
+
+  <!-- Dashboard Section -->
+  <section class="dashboard">
+      <div class="container">
+          <div class="dashboard-header">
+              <h1 class="dashboard-title">Olá João, bem-vindo de volta!</h1>
+              <div class="dashboard-filters">
+                  <button class="filter-btn active">Hoje</button>
+                  <button class="filter-btn">Semana</button>
+                  <button class="filter-btn">Mês</button>
+              </div>
+          </div>
+
+          <!-- Cards Section -->
+          <div class="cards-container">
+              <div class="card">
+                  <div class="card-icon">
+                      <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <h3 class="card-title">Vendas Totais</h3>
+                  <div class="card-value">R$ 12.584,00</div>
+                  <div class="card-change positive">
+                      <i class="fas fa-arrow-up"></i>
+                      <span>12% em relação à semana passada</span>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-icon" style="background-color: #FF6584;">
+                      <i class="fas fa-box"></i>
+                  </div>
+                  <h3 class="card-title">Produtos Cadastrados</h3>
+                  <div class="card-value">1.248</div>
+                  <div class="card-change positive">
+                      <i class="fas fa-arrow-up"></i>
+                      <span>8% em relação ao mês passado</span>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-icon" style="background-color: #43A047;">
+                      <i class="fas fa-warehouse"></i>
+                  </div>
+                  <h3 class="card-title">Itens em Estoque</h3>
+                  <div class="card-value">8.956</div>
+                  <div class="card-change negative">
+                      <i class="fas fa-arrow-down"></i>
+                      <span>3% em relação à semana passada</span>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="card-icon" style="background-color: #FF9800;">
+                      <i class="fas fa-truck"></i>
+                  </div>
+                  <h3 class="card-title">Pedidos em Aberto</h3>
+                  <div class="card-value">24</div>
+                  <div class="card-change positive">
+                      <i class="fas fa-arrow-up"></i>
+                      <span>5% em relação ao mês passado</span>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Charts Section -->
+          <div class="charts-container">
+              <div class="chart-card">
+                  <div class="chart-header">
+                      <h3 class="chart-title">Vendas Mensais</h3>
+                      <div class="chart-actions">
+                          <button class="filter-btn">Exportar</button>
+                          <button class="filter-btn">Filtrar</button>
+                      </div>
+                  </div>
+                  <div class="chart-content">
+                      <span>Gráfico de Vendas Mensais</span>
+                  </div>
+              </div>
+              <div class="chart-card">
+                  <div class="chart-header">
+                      <h3 class="chart-title">Produtos Mais Vendidos</h3>
+                      <div class="chart-actions">
+                          <button class="filter-btn">Exportar</button>
+                          <button class="filter-btn">Filtrar</button>
+                      </div>
+                  </div>
+                  <div class="chart-content">
+                      <span>Gráfico de Produtos Mais Vendidos</span>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Quick Actions Section -->
+          <h2 class="dashboard-title" style="margin-bottom: 20px;">Ações Rápidas</h2>
+          <div class="quick-actions">
+              <div class="action-card">
+                  <div class="action-icon">
+                      <i class="fas fa-box-open"></i>
+                  </div>
+                  <h3 class="action-title">Produtos</h3>
+                  <p class="action-description">Gerencie seu catálogo de produtos</p>
+              </div>
+              <div class="action-card">
+                  <div class="action-icon">
+                      <i class="fas fa-warehouse"></i>
+                  </div>
+                  <h3 class="action-title">Estoque</h3>
+                  <p class="action-description">Controle o estoque de produtos</p>
+              </div>
+              <div class="action-card">
+                  <div class="action-icon">
+                      <i class="fas fa-chart-bar"></i>
+                  </div>
+                  <h3 class="action-title">Relatórios</h3>
+                  <p class="action-description">Visualize relatórios de desempenho</p>
+              </div>
+              <div class="action-card">
+                  <div class="action-icon">
+                      <i class="fas fa-handshake"></i>
+                  </div>
+                  <h3 class="action-title">Fornecedores</h3>
+                  <p class="action-description">Gerencie seus fornecedores</p>
+              </div>
+              <div class="action-card">
+                  <div class="action-icon">
+                      <i class="fas fa-clipboard-list"></i>
+                  </div>
+                  <h3 class="action-title">Pedidos</h3>
+                  <p class="action-description">Acompanhe pedidos de estoque</p>
+              </div>
+              <div class="action-card">
+                  <div class="action-icon">
+                      <i class="fas fa-cash-register"></i>
+                  </div>
+                  <h3 class="action-title">Vendas</h3>
+                  <p class="action-description">Registre e gerencie vendas</p>
+              </div>
+          </div>
+
+          <!-- Recent Activity Section -->
+          <div class="activity-section">
+              <div class="activity-header">
+                  <h3 class="activity-title">Atividades Recentes</h3>
+                  <button class="filter-btn">Ver Tudo</button>
+              </div>
+              <ul class="activity-list">
+                  <li class="activity-item">
+                      <div class="activity-icon">
+                          <i class="fas fa-box"></i>
+                      </div>
+                      <div class="activity-details">
+                          <div class="activity-action">Novo produto adicionado: Notebook Acer</div>
+                          <div class="activity-time">Hoje, 14:32</div>
+                      </div>
+                  </li>
+                  <li class="activity-item">
+                      <div class="activity-icon">
+                          <i class="fas fa-shopping-cart"></i>
+                      </div>
+                      <div class="activity-details">
+                          <div class="activity-action">Nova venda registrada: R$ 1.899,00</div>
+                          <div class="activity-time">Hoje, 12:45</div>
+                      </div>
+                  </li>
+                  <li class="activity-item">
+                      <div class="activity-icon">
+                          <i class="fas fa-exclamation-triangle"></i>
+                      </div>
+                      <div class="activity-details">
+                          <div class="activity-action">Alerta de estoque baixo: Smartphone Samsung</div>
+                          <div class="activity-time">Ontem, 16:20</div>
+                      </div>
+                  </li>
+                  <li class="activity-item">
+                      <div class="activity-icon">
+                          <i class="fas fa-truck"></i>
+                      </div>
+                      <div class="activity-details">
+                          <div class="activity-action">Novo pedido de estoque criado: #5423</div>
+                          <div class="activity-time">Ontem, 10:15</div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </section>
+<script src="dashboard.js"></script>
+</body>
+</html>
