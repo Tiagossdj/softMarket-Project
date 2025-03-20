@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas - SoftMarket</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="vendas.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-boxes"></i>
+                SoftMarket
+            </a>
+            <nav class="nav-links">
+                <a href="#">Dashboard</a>
+                <a href="#">Produtos</a>
+                <a href="#">Estoque</a>
+                <a href="#" class="active">Vendas</a>
+                <a href="#">Fornecedores</a>
+                <a href="#">Relatórios</a>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nova Venda
+                </button>
+                <div class="user-profile">
+                    <div class="avatar">JD</div>
+                    <span>João</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="page-content">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Vendas</h1>
+                    <div class="breadcrumb">
+                        <a href="#">Dashboard</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="#">Vendas</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Nova Venda</span>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+
+                <div class="row">
+                    <!-- Coluna Esquerda -->
+                    <div class="col">
+                        <!-- Card: Adicionar Produto -->
+                        <div class="card">
+                            <form id="addProdutoForm">
+                                <div class="form-group">
+                                    <label for="produtoAdicionar">Produto*</label>
+                                    <input type="text" id="produtoAdicionar" name="produtoAdicionar" placeholder="Adicionar Produto ou Escanear Código de Barras" required>
+                                </div>
+                                <button type="submit" class="btn btn-info">Adicionar Produto</button>
+                            </form>
+                        </div>
+
+                        <!-- Card: Lista de Produtos Adicionados -->
+                        <div class="card">
+                            <h2>Produtos Adicionados</h2>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Quantidade</th>
+                                        <th>Preço Unitário</th>
+                                        <th>Total</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Arroz 5kg</td>
+                                        <td>2</td>
+                                        <td>R$ 20,00</td>
+                                        <td>R$ 40,00</td>
+                                        <td class="actions">
+                                            <button class="edit-btn">Editar</button>
+                                            <button class="delete-btn">Excluir</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Feijão 1kg</td>
+                                        <td>3</td>
+                                        <td>R$ 5,00</td>
+                                        <td>R$ 15,00</td>
+                                        <td class="actions">
+                                            <button class="edit-btn">Editar</button>
+                                            <button class="delete-btn">Excluir</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Coluna Direita -->
+                    <div class="col">
+                        <!-- Card: Total e Formas de Pagamento -->
+                        <div class="card">
+                            <h2>Total da Venda</h2>
+                            <div class="total-info">
+                                <div><strong>Total dos Itens:</strong> R$ 55,00</div>
+                                <div><strong>Subtotal:</strong> R$ 55,00</div>
+                                <div><strong>Desconto/Cupom:</strong> R$ 5,00</div>
+                                <div><strong>Total Final:</strong> R$ 50,00</div>
+                            </div>
+                        </div>
+
+                        <!-- Card: Formas de Pagamento -->
+                        <div class="card">
+                            <h2>Formas de Pagamento</h2>
+                            <form id="pagamentoForm">
+                                <div class="form-group">
+                                    <label for="formaPagamento">Escolha a Forma de Pagamento*</label>
+                                    <select id="formaPagamento" name="formaPagamento">
+                                        <option value="dinheiro">Dinheiro</option>
+                                        <option value="cartaoCredito">Cartão de Crédito</option>
+                                        <option value="pix">PIX</option>
+                                        <option value="debito">Débito</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="valorRecebido">Valor Recebido*</label>
+                                    <input type="number" id="valorRecebido" name="valorRecebido" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="troco">Troco</label>
+                                    <input type="number" id="troco" name="troco" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="qrcode">QR Code</label>
+                                    <div id="qrcode" class="qrcode">QR Code PIX Aqui</div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Card: Finalizar Venda -->
+                        <div class="card">
+                            <button class="btn btn-success">
+                                <i class="fas fa-check-circle"></i> Finalizar Venda
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- fim main-content -->
+
+        </div> <!-- fim page-content -->
+    </div> <!-- fim container -->
+
+</body>
+</html>
