@@ -1,7 +1,7 @@
 :root {
-      --primary-color: #6C63FF;
+      --primary-color: #8a84f4;
       --secondary-color: #F5F5F5;
-      --accent-color: #FF6584;
+      --accent-color: #120c2a;
       --text-color: #333333;
       --light-text: #666666;
       --background: #FFFFFF;
@@ -258,136 +258,15 @@
       border-top: 1px solid var(--border-color);
   }
   
-  /* Image Upload */
-  .image-upload {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      border: 2px dashed var(--border-color);
-      border-radius: 6px;
-      min-height: 180px;
-      cursor: pointer;
-      transition: border-color 0.3s ease;
-  }
-  
-  .image-upload:hover {
-      border-color: var(--primary-color);
-  }
-  
-  .image-upload i {
-      font-size: 40px;
-      color: var(--light-text);
-      margin-bottom: 10px;
-  }
-  
-  .image-upload-text {
-      text-align: center;
-  }
-  
-  .image-upload-text span {
-      color: var(--primary-color);
-      font-weight: 500;
-  }
-  
-  /* Table */
-  .table-container {
-      overflow-x: auto;
-  }
-  
-  .variants-table {
-      width: 100%;
-      border-collapse: collapse;
-  }
-  
-  .variants-table th,
-  .variants-table td {
-      padding: 10px 15px;
-      text-align: left;
-      border-bottom: 1px solid var(--border-color);
-  }
-  
-  .variants-table th {
-      background-color: #f9f9f9;
-      font-weight: 600;
-  }
-  
-  .variants-table tr:hover {
-      background-color: #f5f5f5;
-  }
-  
-  .variants-table td input {
-      width: 100%;
-      padding: 8px 10px;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-  }
-  
-  .variants-table .actions {
-      display: flex;
-      gap: 10px;
-  }
-  
-  .variants-table .actions button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--light-text);
-      transition: color 0.3s ease;
-  }
-  
-  .variants-table .actions button:hover {
-      color: var(--primary-color);
-  }
-  
-  .variants-table .actions button.delete:hover {
-      color: #F44336;
-  }
-  
-  .add-variant {
-      margin-top: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      color: var(--primary-color);
-      background: none;
-      border: none;
-      font-weight: 500;
-  }
-  
-  /* Tags Input */
-  .tags-input {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 10px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      min-height: 45px;
-  }
-  
-  .tag {
-      background-color: #f0f0f0;
-      padding: 5px 10px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-  }
-  
-  .tag i {
-      cursor: pointer;
-      font-size: 12px;
-  }
-  
-  .tags-input input {
-      flex: 1;
-      border: none;
-      outline: none;
-      padding: 5px;
-      min-width: 60px;
+  /* Buttons */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
   }
   
   /* Toggle Switch */
