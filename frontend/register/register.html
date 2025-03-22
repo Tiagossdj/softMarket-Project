@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoftMarket - Registro</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-section">
+            <div class="login-box">
+                <h1>Crie sua Conta no SoftMarket</h1>
+                
+                <div class="input-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" placeholder="Digite seu nome de usuário", autocomplete ="username"> 
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="Digite sua senha">
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm-password">Confirmar Senha</label>
+                    <input type="password" id="confirm-password" placeholder="Confirme sua senha">
+                </div>
+                <div class="input-group role-options">
+                    <label for="gerente">Escolha o papel:</label>
+                    <div>
+                        <input type="radio" id="gerente" name="role" value="gerente">
+                        <label for="gerente">Gerente</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="funcionario" name="role" value="funcionario">
+                        <label for="funcionario">Funcionário</label>
+                    </div>
+                </div>
+                
+                <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+                <!-- Remover a tag <a> em torno do botão -->
+                <button class="btn-login" id="registerButton">Registrar</button>
+                
+                <a href="/frontend/login/login.html" class="login-link">Já tem uma conta? Faça login aqui</a>
+            </div>
+        </div>
+
+        <div class="logo-section">
+            <div class="raindrop drop1"></div>
+            <div class="raindrop drop2"></div>
+            <div class="raindrop drop3"></div>
+            <div class="raindrop drop4"></div>
+            <div class="raindrop drop5"></div>
+
+            <div class="circles">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+                <div class="circle circle-3"></div>
+                <div class="circle circle-4"></div>
+                <div class="circle circle-5"></div>
+            </div>
+
+            <div class="logo">SoftMarket</div>
+            <div class="tagline" id="tagline"></div>
+        </div>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

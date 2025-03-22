@@ -1,9 +1,9 @@
 from datetime import date, datetime
-from flask import Blueprint, request, jsonify, send_file
+from flask import Blueprint, request, jsonify
 from app.modelo_db import Compra, Fornecedor, ItemCompra, PedidoEstoque, Produto, db
 import pandas as pd
-from io import BytesIO
 from app.utils.gerar_excel import gerar_excel
+from sqlalchemy.orm import joinedload
 
 
 relatorio_route = Blueprint("relatorio", __name__)
@@ -225,9 +225,6 @@ def relatorio_estoque_baixo_excel():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
-from sqlalchemy.orm import joinedload
 
 
 @relatorio_route.route("/relatorio_pedidos_estoque_excel", methods=["GET"])
