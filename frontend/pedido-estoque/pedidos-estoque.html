@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos de Estoque - SoftMarket</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pedidos-estoque.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-boxes"></i>
+                SoftMarket
+                <nav class="nav-links">
+                    <a href="/frontend/dashboard/dashboard.html">Dashboard</a>
+                    <a href="/frontend/Produto/produto.html">Produtos</a>
+                    <a href="/frontend/estoque/estoque.html">Estoque</a>
+                    <a href="/frontend/Fornecedor/fornecedor.html">Fornecedores</a>
+                    <a href="/frontend/vendas/vendas.html">Vendas</a>
+                    <a href="/frontend/relatórios/relatorios.html">Relatórios</a>
+                </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Novo Pedido
+                </button>
+                <div class="user-profile">
+                    <div class="avatar">JD</div>
+                    <span>João</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="page-content">
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Pedidos de Estoque</h1>
+                    <div class="breadcrumb">
+                        <a href="#">Dashboard</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <a href="#">Estoque</a>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Pedidos de Estoque</span>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+
+                <!-- Card: Buscar Pedido Específico -->
+                <div class="card">
+                    <form id="buscarPedidoForm">
+                        <div class="form-group">
+                            <label for="pedidoBuscar">Nome do Produto Pedido*</label>
+                            <input type="text" id="pedidoBuscar" name="pedidoBuscar" required placeholder="Buscar Pedido pelo nome do Produto">
+                        </div>
+                        <button type="submit" class="btn btn-info">Buscar Pedido</button>
+                    </form>
+                </div>
+
+                <!-- Card: Tabela de Pedidos de Estoque -->
+                <div class="card">
+                    <h2>Pedidos de Estoque</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Data do Pedido</th>
+                                <th>Fornecedor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Arroz Integral</td>
+                                <td>50 kg</td>
+                                <td>20/03/2025</td>
+                                <td>Distribuidora Alimentos ABC</td>
+                                <td class="actions">
+                                    <button class="edit-btn">Editar</button>
+                                    <button class="delete-btn">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Feijão Carioca</td>
+                                <td>30 kg</td>
+                                <td>18/03/2025</td>
+                                <td>Fornecedora XYZ</td>
+                                <td class="actions">
+                                    <button class="edit-btn">Editar</button>
+                                    <button class="delete-btn">Excluir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Açúcar Cristal</td>
+                                <td>100 kg</td>
+                                <td>15/03/2025</td>
+                                <td>Indústria de Alimentos Sul</td>
+                                <td class="actions">
+                                    <button class="edit-btn">Editar</button>
+                                    <button class="delete-btn">Excluir</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Card: Botão Atualizar -->
+                <div class="card">
+                    <div class="quick-actions" style="margin-top: 20px;">
+                        <button class="btn btn-warning">
+                            <i class="fas fa-sync-alt"></i> Atualizar
+                        </button>
+                    </div>
+                </div>
+
+            </div> <!-- fim main-content -->
+
+        </div> <!-- fim page-content -->
+    </div> <!-- fim container -->
+
+</body>
+</html>
