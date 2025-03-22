@@ -51,9 +51,6 @@ def excluir_fornecedor(id):
 
     # Verifica se o fornecedor está associado a produtos ou pedidos de estoque
     if fornecedor.produtos or fornecedor.pedidos_estoque:
-        print(
-            f"Fornecedor {fornecedor.id} não pode ser excluído, pois está associado a produtos ou pedidos de estoque."
-        )
         return (
             jsonify(
                 {
@@ -63,11 +60,10 @@ def excluir_fornecedor(id):
             400,
         )
 
-    # Exclui o fornecedor do banco de dados
+    # Exclui o fornecedor
     db.session.delete(fornecedor)
     db.session.commit()
 
-    # Retorna uma mensagem de sucesso
     return jsonify({"message": "Fornecedor excluído com sucesso!"}), 200
 
 

@@ -75,6 +75,7 @@ def listar_produtos():
             "nome": produto.nome,
             "preco": produto.preco,
             "quantidade_em_estoque": produto.quantidade_em_estoque,
+            "estoque_minimo": produto.estoque_minimo,
             "fornecedor_id": produto.fornecedor_id,
         }
         for produto in produtos

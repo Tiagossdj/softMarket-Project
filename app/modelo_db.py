@@ -1,5 +1,8 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from enum import Enum
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 db = SQLAlchemy()
 
@@ -33,6 +36,7 @@ class Compra(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.DateTime, nullable=False)
     total = db.Column(db.Float, nullable=False)
+    forma_pagamento = db.Column(db.String(50))
 
     # Relacionamento <reverso> para acessar os itens da compra
     itens = db.relationship("ItemCompra", back_populates="compra")
@@ -77,3 +81,26 @@ class HistoricoProduto(db.Model):
     data_alteracao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     produto = db.relationship("Produto", backref="historico_produto")
+
+
+class Role(Enum):
+    gerente = "gerente"
+    funcionario = "funcionario"
+
+
+class Usuario(db.Model):
+    __tablename__ = "usuarios"
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    role = db.Column(db.Enum(Role), default=Role.funcionario, nullable=False)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def has_role(self, role):
+        return self.role == role
