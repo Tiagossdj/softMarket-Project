@@ -10,6 +10,7 @@ def test_realiza_compra_sucesso(client):
         ],
         "data": "2025-03-18T10:00:00",
         "total": 80.0,  # Total da compra
+        "forma_pagamento": "pix",
     }
 
     # Realizar a requisição POST para criar a compra
@@ -31,6 +32,7 @@ def test_cancelar_compra_sucesso(client):
         ],
         "data": "2025-03-18T10:00:00",
         "total": 80.0,  # Total da compra
+        "forma_pagamento": "pix",
     }
 
     # Realizar a requisição POST para criar a compra
