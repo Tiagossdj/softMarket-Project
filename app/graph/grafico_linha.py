@@ -7,7 +7,7 @@ def gerar_grafico_linha(dados):
     labels = dados.keys()
     values = dados.values()
     fig, ax = plt.subplots()
-    ax.plot(labels, values)
+    ax.plot(labels, values, marker="o")
 
     img_io = io.BytesIO()
     fig.savefig(img_io, format="png")
