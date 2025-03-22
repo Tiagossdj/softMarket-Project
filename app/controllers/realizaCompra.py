@@ -1,7 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app import db
 from app.modelo_db import Compra, ItemCompra, Produto
-from datetime import datetime
 import logging
 
 realiza_compra = Blueprint("realiza_compra", __name__)
@@ -13,7 +12,11 @@ def realiza_compra_func():
         compra_data = request.get_json()
 
         # Criação da compra
-        compra = Compra(data=compra_data["data"], total=compra_data["total"])
+        compra = Compra(
+            data=compra_data["data"],
+            total=compra_data["total"],
+            forma_pagamento=compra_data["forma_pagamento"],
+        )
         db.session.add(compra)
         db.session.flush()  # Para obter o ID da compra antes de salvar os itens
 
@@ -92,3 +95,12 @@ def cancelar_compra(id):
         db.session.rollback()
         print(f"Erro ao cancelar compra: {str(e)}")  # Log do erro para depuração
         return jsonify({"error": str(e)}), 500
+
+
+formas_pagamento_bp = Blueprint("formas_pagamento", __name__)
+
+
+@formas_pagamento_bp.route("/formasPagamento", methods=["GET"])
+def listar_formas_pagamento():
+    formas = ["Cartão de Crédito", "Cartão de Débito", "Dinheiro", "Pix"]
+    return jsonify({"formas_pagamento": formas})
