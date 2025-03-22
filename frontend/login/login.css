@@ -261,3 +261,18 @@ h1 {
       height: 70%;
   }
 }
+
+/* Links de login e registro */
+.register-link, .login-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ff8c7a;
+  text-decoration: none;
+}
+
+.register-link:hover, .login-link:hover {
+  text-decoration: underline;
+  color: #ff7b66;
+}

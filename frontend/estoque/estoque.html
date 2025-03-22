@@ -18,12 +18,12 @@
                 SoftMarket
             </a>
             <nav class="nav-links">
-                <a href="#">Dashboard</a>
-                <a href="#">Produtos</a>
-                <a href="#" class="active">Estoque</a>
-                <a href="#">Fornecedores</a>
-                <a href="#">Vendas</a>
-                <a href="#">Relatórios</a>
+                <a href="/frontend/dashboard/dashboard.html">Dashboard</a>
+                <a href="/frontend/Produto/produto.html">Produtos</a>
+                <a href="/frontend/estoque/estoque.html">Estoque</a>
+                <a href="/frontend/Fornecedor/fornecedor.html">Fornecedores</a>
+                <a href="/frontend/vendas/vendas.html">Vendas</a>
+                <a href="/frontend/relatórios/relatorios.html">Relatórios</a>
             </nav>
             <div class="user-actions">
                 <button class="btn btn-primary">
@@ -46,9 +46,9 @@
                 <div>
                     <h1 class="page-title">Controle de Estoque</h1>
                     <div class="breadcrumb">
-                        <a href="#">Dashboard</a>
+                        <a href="/frontend/dashboard/dashboard.html">Dashboard</a>
                         <i class="fas fa-chevron-right"></i>
-                        <a href="#">Estoque</a>
+                        <a href="/frontend/estoque/estoque.html">Estoque</a>
                         <i class="fas fa-chevron-right"></i>
                         <span>Gerenciar Estoque</span>
                     </div>
@@ -63,7 +63,7 @@
             <!-- Main Content -->
             <div class="main-content">
 
-                <!-- Card: Visualizar Produto Específico -->
+
                 <div class="card">
                     <form id="visualizarProdutoForm">
                         <div class="form-group">
@@ -92,7 +92,6 @@
                                 <td>50</td>
                                 <td class="alert">Abaixo do Estoque Mínimo</td>
                                 <td class="actions">
-                                    <button class="edit-btn">Editar</button>
                                     <button class="delete-btn">Excluir</button>
                                 </td>
                             </tr>
@@ -101,7 +100,6 @@
                                 <td>100</td>
                                 <td class="ok">Estoque OK</td>
                                 <td class="actions">
-                                    <button class="edit-btn">Editar</button>
                                     <button class="delete-btn">Excluir</button>
                                 </td>
                             </tr>
@@ -110,7 +108,6 @@
                                 <td>5</td>
                                 <td class="alert">Abaixo do Estoque Mínimo</td>
                                 <td class="actions">
-                                    <button class="edit-btn">Editar</button>
                                     <button class="delete-btn">Excluir</button>
                                 </td>
                             </tr>
@@ -125,10 +122,11 @@
                     </button>
                 </div>
 
-            </div> <!-- fim main-content -->
+            </div> 
 
-        </div> <!-- fim page-content -->
-    </div> <!-- fim container -->
+        </div> 
+    </div> 
 
 </body>
+<script src="estoque.js"></script>
 </html>
