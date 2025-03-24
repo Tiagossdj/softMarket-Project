@@ -1,92 +1,136 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const tabelaBody = document.querySelector('table tbody');
-  const produtoVisualizarInput = document.getElementById('produtoVisualizar');
-  const atualizarEstoqueBtn = document.querySelector('.update-stock button');
-  
-  const API_URL = 'http://127.0.0.1:5000/produtos';  // URL da API
+document.addEventListener('DOMContentLoaded', () => {
+    const visualizarProdutoForm = document.getElementById('visualizarProdutoForm');
+    const tabelaEstoque = document.querySelector('table tbody');
 
-  // Função para carregar todos os produtos
-  function carregarProdutos(url) {
-      fetch(url)  // Chamando a rota de produtos
-          .then(response => response.json())  // Converte a resposta para JSON
-          .then(data => {
-              tabelaBody.innerHTML = '';  // Limpa a tabela antes de preencher
+    // Função para carregar estoque
+    async function carregarEstoque() {
+        try {
+            const response = await fetch('http://127.0.0.1:5000/produtos');
+            if (!response.ok) {
+                throw new Error('Erro ao carregar estoque');
+            }
+            const estoque = await response.json();
+            atualizarTabelaEstoque(estoque);
+        } catch (error) {
+            console.error('Erro ao carregar estoque:', error);
+            alert(error.message);
+        }
+    }
 
-              // Verifique se há produtos na resposta
-              if (data.length > 0) {
-                  data.forEach(produto => {
-                      const alerta = produto.quantidade_em_estoque < produto.estoque_minimo ? 'Abaixo do Estoque Mínimo' : 'Estoque OK';
-                      const alertaClass = produto.quantidade_em_estoque < produto.estoque_minimo ? 'low-stock' : 'ok';
+    // Visualizar Produto
+    visualizarProdutoForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const produtoNome = document.getElementById('produtoVisualizar').value.trim();
 
-                      const tr = document.createElement('tr');  // Cria uma nova linha para o produto
+        try {
+            // Buscar todos os produtos
+            const response = await fetch('http://127.0.0.1:5000/produtos');
+            if (!response.ok) {
+                throw new Error('Erro ao buscar produtos');
+            }
+            const produtos = await response.json();
 
-                      // Adiciona a classe de alerta de estoque corretamente
-                      if (alertaClass) {
-                          tr.classList.add(alertaClass);  // Adiciona a classe para alerta de estoque
-                      }
+            // Filtrar produto pelo nome (case-insensitive)
+            const produtoEncontrado = produtos.find(
+                produto => produto.nome.toLowerCase().includes(produtoNome.toLowerCase())
+            );
 
-                      tr.innerHTML = `
-                          <td>${produto.nome}</td>
-                          <td>${produto.quantidade_em_estoque}</td>
-                          <td class="${alertaClass === 'low-stock' ? 'alert' : 'ok'}">${alerta}</td>
-                          <td class="actions">
-                              <button class="delete-btn" data-id="${produto.id}">Excluir</button>
-                          </td>
-                      `;
-                      tabelaBody.appendChild(tr);  // Adiciona a linha à tabela
-                  });
+            if (!produtoEncontrado) {
+                alert('Produto não encontrado');
+                return;
+            }
 
-                  // Adiciona evento de exclusão para cada botão "Excluir"
-                  const deleteBtns = document.querySelectorAll('.delete-btn');
-                  deleteBtns.forEach(btn => {
-                      btn.addEventListener('click', function () {
-                          const produtoId = btn.getAttribute('data-id');
-                          excluirProduto(produtoId);
-                      });
-                  });
-              } else {
-                  tabelaBody.innerHTML = '<tr><td colspan="4">Nenhum produto encontrado.</td></tr>';  // Exibe uma mensagem caso não haja produtos
-              }
-          })
-          .catch(error => {
-              console.error('Erro ao carregar estoque:', error);
-              tabelaBody.innerHTML = '<tr><td colspan="4">Erro ao carregar os produtos.</td></tr>';  // Exibe uma mensagem de erro
-          });
-  }
+            // Destacar produto na tabela
+            highlightProduto(produtoEncontrado.id);
+        } catch (error) {
+            console.error('Erro:', error);
+            alert(error.message);
+        }
+    });
 
-  // Função para excluir um produto
-  function excluirProduto(id) {
-      fetch(`http://127.0.0.1:5000/produto/${id}`, {
-          method: 'DELETE',
-      })
-          .then(response => response.json())
-          .then(data => {
-              alert(data.message);  // Exibe a mensagem de sucesso ou erro
-              carregarProdutos(API_URL);  // Atualiza a lista de produtos após exclusão
-          })
-          .catch(error => {
-              console.error('Erro ao excluir produto:', error);
-              alert('Erro ao excluir o produto.');
-          });
-  }
+    // Função para destacar produto na tabela
+    function highlightProduto(produtoId) {
+        const linhas = tabelaEstoque.querySelectorAll('tr');
+        linhas.forEach(linha => {
+            linha.classList.remove('produto-destacado');
+            if (linha.dataset.produtoId === produtoId.toString()) {
+                linha.classList.add('produto-destacado');
+                linha.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    }
 
-  // Função para filtrar produtos pelo nome
-  produtoVisualizarInput.addEventListener('input', function () {
-      const nomeProduto = produtoVisualizarInput.value.trim().toLowerCase();
-      if (nomeProduto) {
-          // Filtra os produtos com base no nome
-          carregarProdutos(`${API_URL}?nome=${nomeProduto}`);
-      } else {
-          // Se o campo estiver vazio, carrega todos os produtos
-          carregarProdutos(API_URL);
-      }
-  });
+    tabelaEstoque.addEventListener('click', async (e) => {
+        if (e.target.classList.contains('delete-btn')) {
+            const linha = e.target.closest('tr');
+            const produtoId = linha.dataset.produtoId;
+            const nomeProduto = linha.querySelector('td:first-child').textContent.trim();
+    
+            if (confirm(`Tem certeza que deseja excluir o produto ${nomeProduto} do estoque?`)) {
+                try {
+                    const response = await fetch(`http://127.0.0.1:5000/produto/${produtoId}`, {
+                        method: 'DELETE'
+                    });
+    
+                    // Verifica se há conteúdo para ser parseado como JSON
+                    const data = response.status !== 204 ? await response.json() : {};
+    
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Erro ao excluir produto');
+                    }
+    
+                    // Remover a linha da tabela
+                    linha.remove();
+                    alert('Produto excluído com sucesso');
+    
+                    // Recarregar o estoque para garantir dados atualizados
+                    await carregarEstoque();
+                } catch (error) {
+                    console.error('Erro:', error);
+                    alert(error.message);
+                }
+            }
+        }
+    });
 
-  // Evento para o botão de "Atualizar Estoque"
-  atualizarEstoqueBtn.addEventListener('click', function () {
-      carregarProdutos(API_URL);  // Simplesmente recarrega a lista de produtos
-  });
 
-  // Carrega todos os produtos inicialmente
-  carregarProdutos(API_URL);
+    // Função para atualizar a tabela de estoque
+    function atualizarTabelaEstoque(estoque) {
+        // Limpar tabela atual
+        tabelaEstoque.innerHTML = '';
+
+        // Adicionar novas linhas com dados atualizados
+        estoque.forEach(produto => {
+            const linha = document.createElement('tr');
+            linha.dataset.produtoId = produto.id;
+            if (produto.quantidade_em_estoque < produto.estoque_minimo) {
+                linha.classList.add('low-stock');
+            }
+            linha.innerHTML = `
+                <td>${produto.nome}</td>
+                <td>${produto.quantidade_em_estoque}</td>
+                <td class="${produto.quantidade_em_estoque < produto.estoque_minimo ? 'alert' : 'ok'}">
+                    ${produto.quantidade_em_estoque < produto.estoque_minimo ? 'Abaixo do Estoque Mínimo' : 'Estoque OK'}
+                </td>
+                <td class="actions">
+                    <button class="delete-btn">Excluir</button>
+                </td>
+            `;
+
+            tabelaEstoque.appendChild(linha);
+        });
+    }
+
+    // Carregar estoque inicial
+    carregarEstoque();
 });
+
+// Estilos para destacar produto
+const estiloDestaque = document.createElement('style');
+estiloDestaque.textContent = `
+    .produto-destacado {
+        background-color: #e6f3ff !important;
+        font-weight: bold;
+    }
+`;
+document.head.appendChild(estiloDestaque);

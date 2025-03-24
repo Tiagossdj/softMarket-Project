@@ -71,16 +71,16 @@ class ItemCompra(db.Model):
     produto = db.relationship("Produto", back_populates="itens")
 
 
-class HistoricoProduto(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    produto_id = db.Column(db.Integer, db.ForeignKey("produto.id"), nullable=False)
-    preco_antigo = db.Column(db.Float, nullable=False)
-    preco_novo = db.Column(db.Float, nullable=False)
-    quantidade_antiga = db.Column(db.Integer, nullable=False)
-    quantidade_nova = db.Column(db.Integer, nullable=False)
-    data_alteracao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+# class HistoricoProduto(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     produto_id = db.Column(db.Integer, db.ForeignKey("produto.id"), nullable=False)
+#     preco_antigo = db.Column(db.Float, nullable=False)
+#     preco_novo = db.Column(db.Float, nullable=False)
+#     quantidade_antiga = db.Column(db.Integer, nullable=False)
+#     quantidade_nova = db.Column(db.Integer, nullable=False)
+#     data_alteracao = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    produto = db.relationship("Produto", backref="historico_produto")
+#     produto = db.relationship("Produto", backref="historico_produto")
 
 
 class Role(Enum):

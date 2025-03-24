@@ -46,6 +46,7 @@ function carregarFornecedores() {
       data.forEach(fornecedor => {
           const tr = document.createElement('tr');
           tr.innerHTML = `
+              <td>${fornecedor.id}</td>
               <td>${fornecedor.nome}</td>
               <td>${fornecedor.cnpj}</td>
               <td>${fornecedor.contato}</td>

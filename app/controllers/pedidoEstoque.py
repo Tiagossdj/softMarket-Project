@@ -39,7 +39,6 @@ def visualizar_estoque():
                     "produto_id": produto.id,
                     "nome": produto.nome,
                     "quantidade_em_estoque": produto.quantidade_em_estoque,
-                    "fornecedor": produto.fornecedor.nome,
                 }
             )
         return jsonify(estoque), 200

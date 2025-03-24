@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.modelo_db import HistoricoProduto, Produto, db
+from app.modelo_db import Produto, db
 
 # Blueprint para cadastro de produto
 produto_route = Blueprint("produto_route", __name__)
@@ -84,20 +84,13 @@ def listar_produtos():
 
 
 # rota para buscar um produto pelo id
-@produto_route.route("/produto/<int:id>", methods=["GET"])
-def obter_produto_por_id(id):
-    produto = db.session.get(Produto, id)  # Busca o produto pelo ID
+@produto_route.route("/produtos/nome", methods=["GET"])
+def buscar_produto_por_nome():
+    nome = request.args.get("nome")
+    produto = Produto.query.filter_by(nome=nome).first()
     if not produto:
-        return jsonify({"mensagem": "Produto não encontrado"}), 404
-
-    produto_data = {
-        "id": produto.id,
-        "nome": produto.nome,
-        "preco": produto.preco,
-        "quantidade_em_estoque": produto.quantidade_em_estoque,
-        "fornecedor_id": produto.fornecedor_id,
-    }
-    return jsonify(produto_data), 200
+        return jsonify({"message": "Produto não encontrado"}), 404
+    return jsonify({"id": produto.id, "nome": produto.nome}), 200
 
 
 # rota para atualizar quantidade de estoque (manualmente)
@@ -153,37 +146,37 @@ def listar_produtos_comDesconto():
 # desconto = db.Column(db.Float, nullable=True)  # Desconto em percentual
 
 
-# rota para registrar um histórico de alteração em um produto
-@produto_route.route("/produto/<int:id>/atualizar", methods=["PUT"])
-def atualizar_produto(id):
-    try:
-        data = request.get_json()
-        produto = db.session.get(Produto, id)
+# # rota para registrar um histórico de alteração em um produto
+# @produto_route.route("/produto/<int:id>/atualizar", methods=["PUT"])
+# def atualizar_produto(id):
+#     try:
+#         data = request.get_json()
+#         produto = db.session.get(Produto, id)
 
-        if not produto:
-            return jsonify({"error": "Produto não encontrado!"}), 404
+#         if not produto:
+#             return jsonify({"error": "Produto não encontrado!"}), 404
 
-        preco_antigo = produto.preco
-        quantidade_antiga = produto.quantidade_em_estoque
+#         preco_antigo = produto.preco
+#         quantidade_antiga = produto.quantidade_em_estoque
 
-        produto.nome = data.get("nome", produto.nome)
-        produto.preco = data.get("preco", produto.preco)
-        produto.quantidade_em_estoque = data.get(
-            "quantidade_em_estoque", produto.quantidade_em_estoque
-        )
+#         produto.nome = data.get("nome", produto.nome)
+#         produto.preco = data.get("preco", produto.preco)
+#         produto.quantidade_em_estoque = data.get(
+#             "quantidade_em_estoque", produto.quantidade_em_estoque
+#         )
 
-        # Registrar no histórico
-        historico = HistoricoProduto(
-            produto_id=id,
-            preco_antigo=preco_antigo,
-            preco_novo=produto.preco,
-            quantidade_antiga=quantidade_antiga,
-            quantidade_nova=produto.quantidade_em_estoque,
-        )
-        db.session.add(historico)
-        db.session.commit()
+#         # Registrar no histórico
+#         historico = HistoricoProduto(
+#             produto_id=id,
+#             preco_antigo=preco_antigo,
+#             preco_novo=produto.preco,
+#             quantidade_antiga=quantidade_antiga,
+#             quantidade_nova=produto.quantidade_em_estoque,
+#         )
+#         db.session.add(historico)
+#         db.session.commit()
 
-        return jsonify({"message": "Produto atualizado com sucesso!"}), 200
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"error": str(e)}), 500
+#         return jsonify({"message": "Produto atualizado com sucesso!"}), 200
+#     except Exception as e:
+#         db.session.rollback()
+#         return jsonify({"error": str(e)}), 500
