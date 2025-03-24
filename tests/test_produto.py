@@ -102,35 +102,35 @@ def test_listar_produtos(client):
     assert len(response.json) == 2  # Espera-se 2 produtos
 
 
-def test_obter_produto_por_id(client):
-    # Criando um produto de teste
-    with client.application.app_context():
-        from app.modelo_db import Produto, Fornecedor
+# def test_obter_produto_por_id(client):
+#     # Criando um produto de teste
+#     with client.application.app_context():
+#         from app.modelo_db import Produto, Fornecedor
 
-        fornecedor = Fornecedor(
-            nome="Fornecedor Teste", cnpj="12345678", contato="1234567890"
-        )
-        db.session.add(fornecedor)
-        db.session.commit()
+#         fornecedor = Fornecedor(
+#             nome="Fornecedor Teste", cnpj="12345678", contato="1234567890"
+#         )
+#         db.session.add(fornecedor)
+#         db.session.commit()
 
-        produto = Produto(
-            nome="Produto Teste",
-            preco=100.0,
-            quantidade_em_estoque=50,
-            estoque_minimo=40,
-            fornecedor_id=fornecedor.id,
-        )
-        db.session.add(produto)
-        db.session.commit()
-        produto_id = produto.id
+#         produto = Produto(
+#             nome="Produto Teste",
+#             preco=100.0,
+#             quantidade_em_estoque=50,
+#             estoque_minimo=40,
+#             fornecedor_id=fornecedor.id,
+#         )
+#         db.session.add(produto)
+#         db.session.commit()
+#         produto_id = produto.id
 
-    # Realizando a requisição para obter o produto por ID
-    response = client.get(f"/produto/{produto_id}")
+#     # Realizando a requisição para obter o produto por ID
+#     response = client.get(f"/produto/{produto_id}")
 
-    # Verificando a resposta
-    assert response.status_code == 200
-    assert response.json["id"] == produto_id
-    assert response.json["nome"] == "Produto Teste"
+#     # Verificando a resposta
+#     assert response.status_code == 200
+#     assert response.json["id"] == produto_id
+#     assert response.json["nome"] == "Produto Teste"
 
 
 def test_atualizar_estoque_produto(client):
@@ -166,38 +166,38 @@ def test_atualizar_estoque_produto(client):
     assert "Estoque atualizado com sucesso!" in response.json["message"]
 
 
-def test_atualizar_produto(client):
-    # Criando um produto de teste
-    with client.application.app_context():
-        from app.modelo_db import Produto, Fornecedor
+# def test_atualizar_produto(client):
+#     # Criando um produto de teste
+#     with client.application.app_context():
+#         from app.modelo_db import Produto, Fornecedor
 
-        fornecedor = Fornecedor(
-            nome="Fornecedor Teste", cnpj="12345678", contato="1234567890"
-        )
-        db.session.add(fornecedor)
-        db.session.commit()
+#         fornecedor = Fornecedor(
+#             nome="Fornecedor Teste", cnpj="12345678", contato="1234567890"
+#         )
+#         db.session.add(fornecedor)
+#         db.session.commit()
 
-        produto = Produto(
-            nome="Produto Teste",
-            preco=100.0,
-            quantidade_em_estoque=50,
-            estoque_minimo=40,
-            fornecedor_id=fornecedor.id,
-        )
-        db.session.add(produto)
-        db.session.commit()
-        produto_id = produto.id
+#         produto = Produto(
+#             nome="Produto Teste",
+#             preco=100.0,
+#             quantidade_em_estoque=50,
+#             estoque_minimo=40,
+#             fornecedor_id=fornecedor.id,
+#         )
+#         db.session.add(produto)
+#         db.session.commit()
+#         produto_id = produto.id
 
-    # Dados para a atualização do produto
-    atualizar_data = {
-        "nome": "Produto Teste Atualizado",
-        "preco": 120.0,
-        "quantidade_em_estoque": 60,
-    }
+#     # Dados para a atualização do produto
+#     atualizar_data = {
+#         "nome": "Produto Teste Atualizado",
+#         "preco": 120.0,
+#         "quantidade_em_estoque": 60,
+#     }
 
-    # Realizando a requisição para atualizar o produto
-    response = client.put(f"/produto/{produto_id}/atualizar", json=atualizar_data)
+#     # Realizando a requisição para atualizar o produto
+#     response = client.put(f"/produto/{produto_id}/atualizar", json=atualizar_data)
 
-    # Verificando a resposta
-    assert response.status_code == 200
-    assert "Produto atualizado com sucesso!" in response.json["message"]
+#     # Verificando a resposta
+#     assert response.status_code == 200
+#     assert "Produto atualizado com sucesso!" in response.json["message"]

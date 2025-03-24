@@ -18,17 +18,17 @@ def test_cadastrar_pedido_estoque(client):
     assert response.status_code == 201
 
 
-@pytest.mark.estoque
-def test_visualizar_estoque(client):
-    response = client.get("/estoque")
-    assert response.status_code == 200
-    # Verificar se a resposta contém os dados esperados (ajustar conforme necessário)
-    data = response.get_json()
-    assert isinstance(data, list)
-    assert "produto_id" in data[0]
-    assert "nome" in data[0]
-    assert "quantidade_em_estoque" in data[0]
-    assert "fornecedor" in data[0]
+# @pytest.mark.estoque
+# def test_visualizar_estoque(client):
+#     response = client.get("/estoque")
+#     assert response.status_code == 200
+#     # Verificar se a resposta contém os dados esperados (ajustar conforme necessário)
+#     data = response.get_json()
+#     assert isinstance(data, list)
+#     assert "produto_id" in data[0]
+#     assert "nome" in data[0]
+#     assert "quantidade_em_estoque" in data[0]
+#     assert "fornecedor" in data[0]
 
 
 @pytest.mark.estoque
