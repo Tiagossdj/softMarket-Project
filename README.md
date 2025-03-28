@@ -171,7 +171,7 @@ Após a criação, certifique-se de que a configuração do banco esteja correta
   Após instalar as dependências e configurar o banco de dados, execute o servidor Flask:
 
    ```
-    python app.py
+    flask run
    ```
 
 
