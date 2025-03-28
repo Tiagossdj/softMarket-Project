@@ -9,25 +9,22 @@
     <link rel="stylesheet" href="pedidos-estoque.css">
 </head>
 <body>
-
-    <!-- Header -->
+    <!-- Header-->
     <header>
         <div class="container header-content">
             <a href="#" class="logo">
                 <i class="fas fa-boxes"></i>
                 SoftMarket
-                <nav class="nav-links">
-                    <a href="/frontend/dashboard/dashboard.html">Dashboard</a>
-                    <a href="/frontend/Produto/produto.html">Produtos</a>
-                    <a href="/frontend/estoque/estoque.html">Estoque</a>
-                    <a href="/frontend/Fornecedor/fornecedor.html">Fornecedores</a>
-                    <a href="/frontend/vendas/vendas.html">Vendas</a>
-                    <a href="/frontend/relatórios/relatorios.html">Relatórios</a>
-                </nav>
+            </a>
+            <nav class="nav-links">
+                <a href="/frontend/dashboard/dashboard.html">Dashboard</a>
+                <a href="/frontend/Produto/produto.html">Produtos</a>
+                <a href="/frontend/estoque/estoque.html">Estoque</a>
+                <a href="/frontend/Fornecedor/fornecedor.html">Fornecedores</a>
+                <a href="/frontend/vendas/vendas.html">Vendas</a>
+                <a href="/frontend/relatórios/relatorios.html">Relatórios</a>
+            </nav>
             <div class="user-actions">
-                <button class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Novo Pedido
-                </button>
                 <div class="user-profile">
                     <div class="avatar">JD</div>
                     <span>João</span>
@@ -39,7 +36,6 @@
     <!-- Page Content -->
     <div class="container">
         <div class="page-content">
-
             <!-- Page Header -->
             <div class="page-header">
                 <div>
@@ -52,31 +48,89 @@
                         <span>Pedidos de Estoque</span>
                     </div>
                 </div>
-                <div>
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Voltar
-                    </button>
-                </div>
             </div>
 
             <!-- Main Content -->
             <div class="main-content">
-
-                <!-- Card: Buscar Pedido Específico -->
-                <div class="card">
-                    <form id="buscarPedidoForm">
-                        <div class="form-group">
-                            <label for="pedidoBuscar">Nome do Produto Pedido*</label>
-                            <input type="text" id="pedidoBuscar" name="pedidoBuscar" required placeholder="Buscar Pedido pelo nome do Produto">
+                <!-- Card: Adicionar Novo Pedido de Estoque -->
+                <div class="card" id="novoPedidoCard">
+                    <h2>Novo Pedido de Estoque</h2>
+                    <form id="novoPedidoForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="produtoSelect">Produto*</label>
+                                <select id="produtoSelect" name="produto_id" required>
+                                    <option value="">Selecione um Produto</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantidadePedido">Quantidade*</label>
+                                <input type="number" id="quantidadePedido" name="quantidade" required min="1" placeholder="Digite a quantidade">
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-info">Buscar Pedido</button>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fornecedorSelect">Fornecedor*</label>
+                                <select id="fornecedorSelect" name="fornecedor_id" required>
+                                    <option value="">Selecione um Fornecedor</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Salvar Pedido</button>
+                                <button type="reset" class="btn btn-secondary">Limpar</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
+
+                <!-- Card: Editar Pedido de Estoque (Inicialmente Oculto) -->
+                <div class="card" id="editarPedidoCard" style="display: none;">
+                    <h2>Editar Pedido de Estoque</h2>
+                    <form id="editarPedidoForm">
+                        <input type="hidden" id="editPedidoId" name="id">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="editProdutoSelect">Produto*</label>
+                                <select id="editProdutoSelect" name="produto_id" required>
+                                    <option value="">Selecione um Produto</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="editQuantidadePedido">Quantidade*</label>
+                                <input type="number" id="editQuantidadePedido" name="quantidade" required min="1" placeholder="Digite a quantidade">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="editFornecedorSelect">Fornecedor*</label>
+                                <select id="editFornecedorSelect" name="fornecedor_id" required>
+                                    <option value="">Selecione um Fornecedor</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Atualizar Pedido</button>
+                                <button type="button" id="cancelarEdicao" class="btn btn-secondary">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+<!-- Card: Buscar Pedido Específico -->
+<div class="card">
+    <form id="buscarPedidoForm">
+        <div class="form-group">
+            <label for="pedidoBuscar">Nome do Produto*</label>
+            <input type="text" id="pedidoBuscar" class="autocomplete-input" placeholder="Digite o nome do produto...">
+        </div>
+        <button type="submit" class="btn btn-info">Buscar Pedido</button>
+    </form>
+</div>
+
 
                 <!-- Card: Tabela de Pedidos de Estoque -->
                 <div class="card">
                     <h2>Pedidos de Estoque</h2>
-                    <table>
+                    <table id="pedidosEstoqueTabela">
                         <thead>
                             <tr>
                                 <th>Produto</th>
@@ -86,37 +140,8 @@
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Arroz Integral</td>
-                                <td>50 kg</td>
-                                <td>20/03/2025</td>
-                                <td>Distribuidora Alimentos ABC</td>
-                                <td class="actions">
-                                    <button class="edit-btn">Editar</button>
-                                    <button class="delete-btn">Excluir</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Feijão Carioca</td>
-                                <td>30 kg</td>
-                                <td>18/03/2025</td>
-                                <td>Fornecedora XYZ</td>
-                                <td class="actions">
-                                    <button class="edit-btn">Editar</button>
-                                    <button class="delete-btn">Excluir</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Açúcar Cristal</td>
-                                <td>100 kg</td>
-                                <td>15/03/2025</td>
-                                <td>Indústria de Alimentos Sul</td>
-                                <td class="actions">
-                                    <button class="edit-btn">Editar</button>
-                                    <button class="delete-btn">Excluir</button>
-                                </td>
-                            </tr>
+                        <tbody id="pedidosEstoqueCorpo">
+                            <!-- Linhas serão populadas dinamicamente -->
                         </tbody>
                     </table>
                 </div>
@@ -124,16 +149,17 @@
                 <!-- Card: Botão Atualizar -->
                 <div class="card">
                     <div class="quick-actions" style="margin-top: 20px;">
-                        <button class="btn btn-warning">
-                            <i class="fas fa-sync-alt"></i> Atualizar
-                        </button>
+                        <a href="/frontend/pedido-estoque/pedidos-estoque.html">
+                            <button class="btn btn-warning" id="atualizarPedidos">
+                                <i class="fas fa-sync-alt"></i> Atualizar
+                            </button>
+                        </a>
                     </div>
                 </div>
-
-            </div> <!-- fim main-content -->
-
-        </div> <!-- fim page-content -->
-    </div> <!-- fim container -->
-
+            </div>
+        </div>
+    </div>
+    
+    <script src="pedidos-estoque.js"></script>
 </body>
 </html>

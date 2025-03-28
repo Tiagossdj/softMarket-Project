@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="vendas.css">
 </head>
 <body>
-
-    <!-- Header -->
     <header>
         <div class="container header-content">
             <a href="#" class="logo">
@@ -37,18 +35,13 @@
         </div>
     </header>
 
-    <!-- Page Content -->
     <div class="container">
         <div class="page-content">
-
-            <!-- Page Header -->
             <div class="page-header">
                 <div>
                     <h1 class="page-title">Vendas</h1>
                     <div class="breadcrumb">
                         <a href="/frontend/dashboard/dashboard.html">Dashboard</a>
-                        <i class="fas fa-chevron-right"></i>
-                        <a href="/frontend/vendas/vendas.html">Vendas</a>
                         <i class="fas fa-chevron-right"></i>
                         <span>Nova Venda</span>
                     </div>
@@ -60,9 +53,7 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
             <div class="main-content">
-
                 <div class="row">
                     <!-- Coluna Esquerda -->
                     <div class="col">
@@ -70,8 +61,14 @@
                         <div class="card">
                             <form id="addProdutoForm">
                                 <div class="form-group">
-                                    <label for="produtoAdicionar">Produto*</label>
-                                    <input type="text" id="produtoAdicionar" name="produtoAdicionar" placeholder="Adicionar Produto ou Escanear Código de Barras" required>
+                                    <label for="produtoSelect">Produto*</label>
+                                    <select id="produtoSelect" name="produtoSelect" required>
+                                        <option value="">Selecione um Produto</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantidade">Quantidade*</label>
+                                    <input type="number" id="quantidade" name="quantidade" min="1" required>
                                 </div>
                                 <button type="submit" class="btn btn-info">Adicionar Produto</button>
                             </form>
@@ -80,7 +77,7 @@
                         <!-- Card: Lista de Produtos Adicionados -->
                         <div class="card">
                             <h2>Produtos Adicionados</h2>
-                            <table>
+                            <table id="produtosAdicionadosTable">
                                 <thead>
                                     <tr>
                                         <th>Produto</th>
@@ -90,27 +87,8 @@
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Arroz 5kg</td>
-                                        <td>2</td>
-                                        <td>R$ 20,00</td>
-                                        <td>R$ 40,00</td>
-                                        <td class="actions">
-                                            <button class="edit-btn">Editar</button>
-                                            <button class="delete-btn">Excluir</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Feijão 1kg</td>
-                                        <td>3</td>
-                                        <td>R$ 5,00</td>
-                                        <td>R$ 15,00</td>
-                                        <td class="actions">
-                                            <button class="edit-btn">Editar</button>
-                                            <button class="delete-btn">Excluir</button>
-                                        </td>
-                                    </tr>
+                                <tbody id="produtosAdicionadosBody">
+                                    <!-- Será preenchido dinamicamente via JavaScript -->
                                 </tbody>
                             </table>
                         </div>
@@ -118,14 +96,13 @@
 
                     <!-- Coluna Direita -->
                     <div class="col">
-                        <!-- Card: Total e Formas de Pagamento -->
+                        <!-- Card: Total da Venda -->
                         <div class="card">
                             <h2>Total da Venda</h2>
-                            <div class="total-info">
-                                <div><strong>Total dos Itens:</strong> R$ 55,00</div>
-                                <div><strong>Subtotal:</strong> R$ 55,00</div>
-                                <div><strong>Desconto/Cupom:</strong> R$ 5,00</div>
-                                <div><strong>Total Final:</strong> R$ 50,00</div>
+                            <div class="total-info" id="totalVendaInfo">
+                                <div><strong>Total dos Itens:</strong> R$ 0,00</div>
+                                <div><strong>Desconto/Cupom:</strong> R$ 0,00</div>
+                                <div><strong>Total Final:</strong> R$ 0,00</div>
                             </div>
                         </div>
 
@@ -142,34 +119,21 @@
                                         <option value="debito">Débito</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="valorRecebido">Valor Recebido*</label>
-                                    <input type="number" id="valorRecebido" name="valorRecebido" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="troco">Troco</label>
-                                    <input type="number" id="troco" name="troco" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="qrcode">QR Code</label>
-                                    <div id="qrcode" class="qrcode">QR Code PIX Aqui</div>
-                                </div>
                             </form>
                         </div>
 
                         <!-- Card: Finalizar Venda -->
                         <div class="card">
-                            <button class="btn btn-success">
+                            <button id="finalizarVendaBtn" class="btn btn-success">
                                 <i class="fas fa-check-circle"></i> Finalizar Venda
                             </button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-            </div> <!-- fim main-content -->
-
-        </div> <!-- fim page-content -->
-    </div> <!-- fim container -->
-
+    <script src="vendas.js"></script>
 </body>
 </html>

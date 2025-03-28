@@ -24,8 +24,9 @@
                 <a href="/frontend/Fornecedor/fornecedor.html">Fornecedores</a>
                 <a href="/frontend/vendas/vendas.html">Vendas</a>
                 <a href="/frontend/relatórios/relatorios.html">Relatórios</a>
+            </nav>
             <div class="user-actions">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary btn-export-header">
                     <i class="fas fa-file-export"></i> Exportar Relatório
                 </button>
                 <div class="user-profile">
@@ -50,11 +51,6 @@
                         <span>Relatórios</span>
                     </div>
                 </div>
-                <div>
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Voltar
-                    </button>
-                </div>
             </div>
 
             <!-- Main Content -->
@@ -73,7 +69,9 @@
                                         <option value="estoqueBaixo">Produtos com Estoque Baixo</option>
                                         <option value="produtosVendidos">Produtos Mais Vendidos</option>
                                         <option value="vendasDiarias">Vendas Diárias</option>
-                                        <option value="faturamento">Faturamento por Categoria</option>
+                                        <option value="fornecedores">Relatório de Fornecedores</option>
+                                        <option value="estoque">Relatório de Estoque</option>
+                                        <option value="pedidosEstoque">Pedidos de Estoque</option>
                                     </select>
                                 </div>
                                 
@@ -82,11 +80,11 @@
                                     <div class="date-inputs">
                                         <div class="date-field">
                                             <label for="dataInicio">De</label>
-                                            <input type="date" id="dataInicio" name="dataInicio" required>
+                                            <input type="date" id="dataInicio" name="dataInicio">
                                         </div>
                                         <div class="date-field">
                                             <label for="dataFim">Até</label>
-                                            <input type="date" id="dataFim" name="dataFim" required>
+                                            <input type="date" id="dataFim" name="dataFim">
                                         </div>
                                     </div>
                                 </div>
@@ -111,84 +109,35 @@
                     
                     <!-- Coluna Direita - Visualização dos dados e gráficos -->
                     <div class="col col-right">
-                        <!-- Visualização dos dados em tabela -->
                         <div class="card">
                             <div class="card-header">
                                 <h2>Dados do Relatório</h2>
-                                <button class="btn btn-sm btn-export">
-                                    <i class="fas fa-file-excel"></i> Exportar Excel
-                                </button>
                             </div>
                             <div class="report-data">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Produto</th>
-                                            <th>Quantidade</th>
-                                            <th>Valor Unitário</th>
-                                            <th>Total Vendido</th>
-                                            <th>Data</th>
+                                             <!-- Cabeçalho será preenchido dinamicamente -->
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="reportDataTable">
                                         <tr>
-                                            <td>Arroz 5kg</td>
-                                            <td>50</td>
-                                            <td>R$ 20,00</td>
-                                            <td>R$ 1.000,00</td>
-                                            <td>15/03/2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Feijão 1kg</td>
-                                            <td>75</td>
-                                            <td>R$ 8,00</td>
-                                            <td>R$ 600,00</td>
-                                            <td>15/03/2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Açúcar 2kg</td>
-                                            <td>35</td>
-                                            <td>R$ 10,00</td>
-                                            <td>R$ 350,00</td>
-                                            <td>16/03/2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Óleo 900ml</td>
-                                            <td>60</td>
-                                            <td>R$ 9,50</td>
-                                            <td>R$ 570,00</td>
-                                            <td>16/03/2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Café 500g</td>
-                                            <td>45</td>
-                                            <td>R$ 15,00</td>
-                                            <td>R$ 675,00</td>
-                                            <td>17/03/2025</td>
+                                            <td colspan="5">Nenhum dado carregado</td>
                                         </tr>
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="3" class="text-right"><strong>Total:</strong></td>
-                                            <td colspan="2"><strong>R$ 3.195,00</strong></td>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
-                        
+
                         <!-- Visualização do gráfico -->
                         <div class="card">
                             <div class="card-header">
                                 <h2>Visualização Gráfica</h2>
-                                <button class="btn btn-sm btn-export">
-                                    <i class="fas fa-image"></i> Exportar Gráfico
-                                </button>
                             </div>
-                            <div class="chart-container">
+                            <div class="chart-container" id="chartContainer">
                                 <div class="chart-placeholder">
                                     <i class="fas fa-chart-bar chart-icon"></i>
-                                    <p>Gráfico de Barras - Produtos Mais Vendidos</p>
+                                    <p>Selecione um relatório para visualizar o gráfico.</p>
                                 </div>
                             </div>
                         </div>
@@ -197,6 +146,8 @@
             </div>
         </div>
     </div>
+
     <script src="relatorios.js"></script>
+
 </body>
 </html>

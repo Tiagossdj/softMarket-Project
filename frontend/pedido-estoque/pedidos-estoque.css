@@ -415,3 +415,33 @@ tr:hover {
     min-width: 100%;
   }
 }
+
+#novoPedidoCard {
+  display: none;
+  transition: all 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+}
+
+#novoPedidoCard.show {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+#novosPedidos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pedido-destacado {
+  background-color: #e6f3ff;
+  transition: background-color 0.5s ease;
+}

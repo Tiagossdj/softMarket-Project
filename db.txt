@@ -59,7 +59,7 @@
 
 --------------------------------------------------------------------------------
 
-Popular Banco de Dados (Para os testes)
+-- Popular Banco de Dados (Para os testes)
 
 -- Inserindo fornecedores
 INSERT INTO fornecedor (nome, cnpj, contato) VALUES 

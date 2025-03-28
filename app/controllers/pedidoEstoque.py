@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, request, jsonify
 from app import db
 from app.modelo_db import PedidoEstoque, Produto
@@ -8,23 +9,57 @@ pedido_estoque = Blueprint("pedido_estoque", __name__)
 @pedido_estoque.route("/pedidoEstoque", methods=["POST"])
 def cadastrar_pedido_estoque():
     try:
+        # Obtém os dados da requisição
         data = request.get_json()
+        print("Dados recebidos:", data)  # Exibe os dados no terminal para depuração
+
+        # Validação dos dados
+        if (
+            not data.get("produto_id")
+            or not data.get("quantidade")
+            or not data.get("fornecedor_id")
+        ):
+            return (
+                jsonify(
+                    {
+                        "error": "Os campos produto_id, quantidade e fornecedor_id são obrigatórios!"
+                    }
+                ),
+                400,
+            )
+
         produto_id = data["produto_id"]
         quantidade = data["quantidade"]
         fornecedor_id = data["fornecedor_id"]
+        print(
+            f"produto_id: {produto_id}, quantidade: {quantidade}, fornecedor_id: {fornecedor_id}"
+        )  # Logando as variáveis
+
+        # Verificar se o produto existe no banco de dados
+        produto = Produto.query.get(produto_id)
+        if not produto:
+            return jsonify({"error": "Produto não encontrado!"}), 404
+        print("Produto encontrado:", produto)  # Logando se o produto foi encontrado
 
         # Criar um novo pedido de estoque
         novo_pedido = PedidoEstoque(
-            produto_id=produto_id, quantidade=quantidade, fornecedor_id=fornecedor_id
+            produto_id=produto_id,
+            quantidade=quantidade,
+            fornecedor_id=fornecedor_id,
+            data_pedido=datetime.utcnow(),
         )
+        print(f"Novo pedido criado: {novo_pedido}")  # Logando o pedido criado
 
-        # Adicionar o pedido de estoque ao banco
+        # Adicionar o pedido de estoque ao banco de dados
         db.session.add(novo_pedido)
         db.session.commit()
 
         return jsonify({"message": "Pedido de estoque realizado com sucesso!"}), 201
+
     except Exception as e:
+        # Se ocorrer um erro, faz o rollback e retorna a mensagem de erro
         db.session.rollback()
+        print("Erro:", str(e))  # Exibe o erro no terminal para depuração
         return jsonify({"error": str(e)}), 500
 
 
@@ -102,8 +137,11 @@ def listar_pedidos_estoque():
                 "produto_id": pedido.produto_id,
                 "quantidade": pedido.quantidade,
                 "fornecedor_id": pedido.fornecedor_id,
-                "produto_nome": pedido.produto.nome,  # Aqui você pode acessar o nome do produto
-                "fornecedor_nome": pedido.fornecedor.nome,  # Nome do fornecedor
+                "produto_nome": pedido.produto.nome,
+                "fornecedor_nome": pedido.fornecedor.nome,
+                "data_pedido": (
+                    pedido.data_pedido.isoformat() if pedido.data_pedido else None
+                ),
             }
             for pedido in pedidos
         ]
@@ -122,6 +160,9 @@ def editar_pedido_estoque(id):
         pedido.produto_id = data.get("produto_id", pedido.produto_id)
         pedido.quantidade = data.get("quantidade", pedido.quantidade)
         pedido.fornecedor_id = data.get("fornecedor_id", pedido.fornecedor_id)
+
+        # Manter a data original ou atualizar se necessário
+        pedido.data_pedido = pedido.data_pedido or datetime.utcnow()
 
         db.session.commit()
         return jsonify({"message": "Pedido de estoque atualizado com sucesso!"}), 200

@@ -27,7 +27,7 @@ def create_app():
     from app.controllers.realizaCompra import realiza_compra
     from app.controllers.relatórios import relatorio_route
     from app.controllers.geraGrafico import grafico_controller
-    from app.controllers.realizaCompra import formas_pagamento_bp
+    from app.controllers.realizaCompra import realiza_compra
     from app.controllers.geraGrafico import gera_grafico_route
     from app.controllers.usuario import registra_usuario
 
@@ -37,7 +37,6 @@ def create_app():
     app.register_blueprint(realiza_compra)
     app.register_blueprint(relatorio_route)
     app.register_blueprint(grafico_controller)
-    app.register_blueprint(formas_pagamento_bp)
     app.register_blueprint(gera_grafico_route)
     app.register_blueprint(registra_usuario, url_prefix="/auth")
 
