@@ -4,40 +4,33 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 
 ### 🔧 **Rotas da Aplicação**
 
-- **POST /produto**  
-  Cadastra um novo produto no sistema.
-
-- **GET /produto**
+- **GET /produtos**
 
  Obtém a lista de produtos cadastrados no sistema.
+ 
+- **POST /produto**
+
+  Cadastra um novo produto no sistema.
 
 - **DELETE /produto/{id}**
 
  Exclui um produto do sistema, se não estiver em um pedido de estoque.
 
-- **POST /fornecedor**
-
-  Cadastra um novo Fornecedor no sistema.
- 
 - **GET /fornecedores**
 
    Obtém a lista de fornecedores cadastrados no sistema.
+  
+- **POST /fornecedor**
+
+  Cadastra um novo Fornecedor no sistema.
 
 - **DELETE /fornecedor/{id}**
 
    Exclui um fornecedor do sistema, caso não esteja associado a produtos ou pedidos de estoque.
 
-- **POST /cliente**
+- **GET /pedidosEstoque**
 
-  Cadastra um novo cliente no sistema.
-
-- **GET /clientes**
-
-  Obtém a lista de clientes cadastrados no sistema.
-
-- **DELETE /cliente/{id}**
-
-  Exclui um cliente do sistema.
+  Descrição: Obtém a lista de pedidos de estoque.
 
 - **POST /pedidoEstoque**
 
@@ -46,19 +39,25 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 - **POST /realizaCompra**
 
   Descrição: Realiza a compra de um produto, alterando o estoque.
+
+- **GET /relatorio...**
+
+  Descrição: Realiza a construção de relatório para excel, por favor olhar a pasta de relatórios pois há varias opções, mas como exemplo: `/relatorio_forncedores_excel`
  
 
 ### 💾 **Banco de Dados**
 
-  O banco de dados utilizado é o PostgreSQL. As tabelas principais do sistema incluem Produto, Fornecedor, Cliente, e PedidoEstoque.
+  O banco de dados utilizado é o PostgreSQL. As tabelas principais do sistema incluem Produto, Fornecedor, Compra, itemCompra, Usuario e PedidoEstoque.
+
+  [![](https://mermaid.ink/img/pako:eNqdVF2PmzAQ_CvIz7koEAIJr9c76VRVilT1pYqEtnhDXGEvZ2y11yT_veajCSG0pfUD4PF4dzxe9sgy4sgShvqdgFyD3CnPja0mbg15x3ZaD6GMJ7i3fX-FKqOFyj1FEq_gviAwXqkxo9vNrxaUERw4pihTrAy9WryldGAqhRJysH1PWmGGnHTqZDx3Ms7tq30-Xyj_I7wDM1V-vQdJGTA0knOLXHB6aoX_JW0Nla2z_TPcGzTl5PXgYNAIifUHpGUjZUTji0H5SLLUMEFg1hDH9P2j9F4hpFYJA1rQcLWyXwwZKEZETxJ8Y8AweC9y7yqdm9J5BTlIVKNX-qmytdZpNWQr1ApG6qiEqvpGmqcHqA7XVVRWepoKvCS-_eNOp4eH06lfyom3Y37i79g9kY6D-mu56jfcXh0MiL10U-J2Qf4Yls2YRGe14K69NFbumDmgc4rVLI57sIWpmWdHBSfz45vKWGK0xRnTZPMDS_ZQVG5my_qiuw51QUtQn4nkry1OsCH9oe1nTVtrKCw5su8siYJ5HPlx7C_jTbRZh_GMvTl0OQ9XYRSHcRTGm0UUn2fsRxNzMV_HwWoZBWGwWEerRRjOWK7rw3QCUXHUj2SVYYkfnH8CzxWahg?type=png)](https://mermaid.live/edit#pako:eNqdVF2PmzAQ_CvIz7koEAIJr9c76VRVilT1pYqEtnhDXGEvZ2y11yT_veajCSG0pfUD4PF4dzxe9sgy4sgShvqdgFyD3CnPja0mbg15x3ZaD6GMJ7i3fX-FKqOFyj1FEq_gviAwXqkxo9vNrxaUERw4pihTrAy9WryldGAqhRJysH1PWmGGnHTqZDx3Ms7tq30-Xyj_I7wDM1V-vQdJGTA0knOLXHB6aoX_JW0Nla2z_TPcGzTl5PXgYNAIifUHpGUjZUTji0H5SLLUMEFg1hDH9P2j9F4hpFYJA1rQcLWyXwwZKEZETxJ8Y8AweC9y7yqdm9J5BTlIVKNX-qmytdZpNWQr1ApG6qiEqvpGmqcHqA7XVVRWepoKvCS-_eNOp4eH06lfyom3Y37i79g9kY6D-mu56jfcXh0MiL10U-J2Qf4Yls2YRGe14K69NFbumDmgc4rVLI57sIWpmWdHBSfz45vKWGK0xRnTZPMDS_ZQVG5my_qiuw51QUtQn4nkry1OsCH9oe1nTVtrKCw5su8siYJ5HPlx7C_jTbRZh_GMvTl0OQ9XYRSHcRTGm0UUn2fsRxNzMV_HwWoZBWGwWEerRRjOWK7rw3QCUXHUj2SVYYkfnH8CzxWahg)
 
 
 
 ###  **Funcionalidades**
 
-- Cadastro de produtos, fornecedores e clientes.
+- Cadastro de produtos, fornecedores e Pedidos de estoque.
 - Controle de estoque, com quantidade disponível e reposição por pedidos de estoque.
-- Exclusão de produtos, fornecedores e clientes, com verificações de dependências.
+- Exclusão de produtos, fornecedores e pedidos, com verificações de dependências.
 
 ### Tecnologias Utilizadas
 
@@ -70,10 +69,11 @@ Este é um projeto de sistema de supermercado, com foco na gestão de produtos, 
 
 * **Python** - Versão: 3.11.7
 * **beeKeeper** - Versão: 5.1.4 
-* **PostgreSQL** - Versão: 17.4 
+* **PostgreSQL** - Versão: 17.4
+* **Postman for Windows** - Versão: 11.38.3
 
 
-[![](https://mermaid.ink/img/pako:eNptk-FOqzAUx1-l6efNwNh2lZvcRBmbU6dzQ01u8UNDqyMBOktJ1GVPcz_7FHuxWw-V2WFDGg7_H_2f9vRscCIYxz5-lnS9QtHod1wgPU7JtNh9JKl4RN3uH3RGAspoqaRAjKMgS3mh-KNBgQgsYixkwRPOhLSgkQXNpWCVEhYRkgWnWfpOJZpzljIAw1KJl8r2G-_BQORrSY1az2fATIjJFBlbyr7cAgDOyT7RNjMCZkpMnm0gBOCCtDJFJreGHAN5SepUG9lOegLQFZmE0cERn4MyA6V1tFMQr0G0j7Ser0C_AT0STJRIP2b90pAzYOY2s3dquGvgbm3OmJaW6w2QCxK-JllV7v79cHHmgCxtpLW9W6Aim_ppnwsA75qaww-7j6YGS9Dvv5f8EIkAeWgqfqjX8x1Qp3Vw_z14-ApwB-dc5jRlurU2n2KM1YrnPMa-fmX8iVaZinFcbDVKtdfyrUiwr2TFO1iK6nmF_SealTqq1owqPkqpbtG8-bqmxV8h9rG-gkrIWd3M0NPAYH-DX7Hf7TnD4ZE76Huup8fA9QYd_Ka_e87wyPkcXq_fd3snJ7-2HfwOC7tOrThOz-s7x95guP0PQdxGyw?type=png)](https://mermaid.live/edit#pako:eNptk-FOqzAUx1-l6efNwNh2lZvcRBmbU6dzQ01u8UNDqyMBOktJ1GVPcz_7FHuxWw-V2WFDGg7_H_2f9vRscCIYxz5-lnS9QtHod1wgPU7JtNh9JKl4RN3uH3RGAspoqaRAjKMgS3mh-KNBgQgsYixkwRPOhLSgkQXNpWCVEhYRkgWnWfpOJZpzljIAw1KJl8r2G-_BQORrSY1az2fATIjJFBlbyr7cAgDOyT7RNjMCZkpMnm0gBOCCtDJFJreGHAN5SepUG9lOegLQFZmE0cERn4MyA6V1tFMQr0G0j7Ser0C_AT0STJRIP2b90pAzYOY2s3dquGvgbm3OmJaW6w2QCxK-JllV7v79cHHmgCxtpLW9W6Aim_ppnwsA75qaww-7j6YGS9Dvv5f8EIkAeWgqfqjX8x1Qp3Vw_z14-ApwB-dc5jRlurU2n2KM1YrnPMa-fmX8iVaZinFcbDVKtdfyrUiwr2TFO1iK6nmF_SealTqq1owqPkqpbtG8-bqmxV8h9rG-gkrIWd3M0NPAYH-DX7Hf7TnD4ZE76Huup8fA9QYd_Ka_e87wyPkcXq_fd3snJ7-2HfwOC7tOrThOz-s7x95guP0PQdxGyw)
+[![](https://mermaid.ink/img/pako:eNqFlN1u2jAUx1_F8jVlSYDlo9KkQgLtWloKtBczvbCwKZGSmDmO-oF4mGnXu9oj8GI1x-Ejg21RdJTj_8_Hfzu2l3gqGMcBfpZ0MUfj8HySIf1ckJDm87agkj2hs7MvqE06lNFcSYEYR10hMz7lTMinkgeoU4EGUrBCiQoRkiGnSfxOJRpwFjMAo1yJ7wWvgNEe7Ih0IWlF7Wo1oWr9W8biU0-uf8zi6XYgE9vA9cjeKSq9UbYlO8BcktLoMRACcEWOrKLS3I6MgPxKjNedvHXdBfn6lGvU4wcjmtgD_Ib0ovHxUl-C2AexusQm3oB-C_pYMJEj_e6r8Lyk-8DdVbmyYF6peAvkgESv06TI1z9Pb4E7oO6r1CmDAwCHh78G-qx_7ZbhHpDR7s_8qZt4DdSYhOIlSwRlmwH_ty_G0OfCJMPDZHSYmHgFTQ8kYrH6x4412KOZefx3zsSHw3Eetwmu4ZTLlMZMH8blRpxgNecpn-BAfzI-o0WiJniSrTRK9aKM3rIpDpQseA1LUTzPcTCjSa6zYsGo4mFM9aFOd60Lmn0TIt120R6VkH1z-uESAAQHS_yKA9uy61bLdR3LbdreZ9tv1vAbDtxWveH5vu_4jtNsWI3WqobfoahV9yzPcu2G2_T8hu15rZq-UzazKR3yjHHZEUWmcOA47uoD0HFgRA?type=png)](https://mermaid.live/edit#pako:eNqFlN1u2jAUx1_F8jVlSYDlo9KkQgLtWloKtBczvbCwKZGSmDmO-oF4mGnXu9oj8GI1x-Ejg21RdJTj_8_Hfzu2l3gqGMcBfpZ0MUfj8HySIf1ckJDm87agkj2hs7MvqE06lNFcSYEYR10hMz7lTMinkgeoU4EGUrBCiQoRkiGnSfxOJRpwFjMAo1yJ7wWvgNEe7Ih0IWlF7Wo1oWr9W8biU0-uf8zi6XYgE9vA9cjeKSq9UbYlO8BcktLoMRACcEWOrKLS3I6MgPxKjNedvHXdBfn6lGvU4wcjmtgD_Ib0ovHxUl-C2AexusQm3oB-C_pYMJEj_e6r8Lyk-8DdVbmyYF6peAvkgESv06TI1z9Pb4E7oO6r1CmDAwCHh78G-qx_7ZbhHpDR7s_8qZt4DdSYhOIlSwRlmwH_ty_G0OfCJMPDZHSYmHgFTQ8kYrH6x4412KOZefx3zsSHw3Eetwmu4ZTLlMZMH8blRpxgNecpn-BAfzI-o0WiJniSrTRK9aKM3rIpDpQseA1LUTzPcTCjSa6zYsGo4mFM9aFOd60Lmn0TIt120R6VkH1z-uESAAQHS_yKA9uy61bLdR3LbdreZ9tv1vAbDtxWveH5vu_4jtNsWI3WqobfoahV9yzPcu2G2_T8hu15rZq-UzazKR3yjHHZEUWmcOA47uoD0HFgRA)
 
 
 
@@ -136,8 +136,7 @@ Em seguida, entre no diretório do projeto:
 
 4. **Configurar o Banco de Dados**
 
-
-  Se você ainda não tem um banco de dados PostgreSQL rodando, você pode configurá-lo da seguinte forma:
+Se você ainda não tem um banco de dados PostgreSQL rodando, você pode configurá-lo da seguinte forma:
   
   - Instalar o PostgreSQL:
 
@@ -148,9 +147,6 @@ Em seguida, entre no diretório do projeto:
    ```
   brew install postgresql
    ```
-
-
-  - Configurar o Banco de Dados:
 
 Se você estiver usando um banco de dados PostgreSQL, pode gerenciá-lo com ferramentas como:
  - Beekeeper (Utilizado neste projeto)
@@ -163,8 +159,12 @@ Abra qualquer uma dessas ferramentas (Beekeeper, PGAdmin, ou DBeaver) e crie um 
 db.txt
 ```
 
-Após a criação, certifique-se de que a configuração do banco esteja correta no arquivo de configuração do seu projeto, como no config.py.
+Após a criação, certifique-se de que a configuração do banco esteja correta no arquivo de configuração do seu projeto, no `config.py` você PRECISA colocar as informações corretas
+inseridas previamente na instalação do postgreSQL, o `usuário` e `senha` é substituído no seguinte código, e caso queira mudar o nome do banco, certifique-se de mudar aqui também (nome do banco de dados `softmarket`).
 
+```
+"postgresql://Usuario:Senha@localhost:5432/softmarket"
+```
 
 5. **Rodar a aplicação**
 
@@ -213,7 +213,7 @@ Você pode baixar o postman ou utiliza-lo online para acessar as funcionalidades
 "message": "Fornecedor cadastrado com sucesso!"
 ```
 
-- O Método Get é necessário colocar o `fornecedor` no plural.
+- O Método Get é necessário colocar o `fornecedor` no plural se quiser listar os fornecedores.
 
 - o Método DELETE é necessário colocar o `id` do fornecedor cadastrado:
 
@@ -241,7 +241,8 @@ http://127.0.0.1:5000/fornecedor/<id>
     "nome": "Arroz",
     "preco": 26.6,
     "quantidade_em_estoque": 100,
-    "fornecedor_id": 1
+    "fornecedor_id": 1,
+    "estoque_minimo":30
   }
 
 ```
@@ -256,7 +257,7 @@ http://127.0.0.1:5000/fornecedor/<id>
 
 - **IMPORTANTE: o Produto só pode ser cadastrado se um fornecedor estiver cadastrado devido as restrições de chave no Banco de Dados (Não existe produto sem fornecedor)**
 
-- O Método Get é necessário colocar o `produto` no plural.
+- O Método Get é necessário colocar o `produto` no plural se quiser listar os produtos cadastrados.
 
 - o Método DELETE é necessário colocar o `id` do produto cadastrado:
 
@@ -265,29 +266,18 @@ http://127.0.0.1:5000/produto/<id>
 ```
 
 
-#### **POST/cliente**
-**Descrição:** Registra um novo Cliente.
+#### **GET/Relatorio**
+**Descrição:** Gera um novo relatório. (olhar diferentes opções de relatório em `softMarket-Project\app\controllers\relatórios.py`)
   
 - **Corpo da Requisição:**
-- No Postman, selecione o método POST e insira a URL da rota:
+- No Postman, selecione o método GET e insira a URL da rota:
   
  ```
- http://127.0.0.1:5000/cliente
+ http://127.0.0.1:5000/relatorio_fornecedores_excel
  ```
     
-- Vá até a aba "Body" e selecione a opção "raw" e escolha o formato JSON.
-- Cole o seguinte corpo da requisição:
-    
-```
-{
-    "nome": "Teste",
-    "cpf": 11122233346,
-    "email": "Teste@teste.com"
-}
-
-```
-
-- Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
+- Não é necessário inserir nada no Body. 
+- Clique na seta ao lado de send **Send and Download** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
 
 ```
   "message": "Cliente cadastrado com sucesso!"
