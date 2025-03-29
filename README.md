@@ -345,6 +345,36 @@ http://127.0.0.1:5000/produto/<id>
 
 - **IMPORTANTE: a compra só pode ser cadastrada se um cliente  estiver cadastrado, devido as restrições de chave no Banco de Dados (Não existe produto vendido sem comprador!)**
 
+
+##  **Utilizando as funções com o FrontEnd**
+
+A interface gráfica do programa pode ser utilizada com a extensão `Live Server` no VScode. Basta procurar o nome `Live Server` em Search na aba de Extensions no lado esquerdo da interface.
+
+### 1. Acessando as Telas
+
+**IMPORTANTE**: Para que as telas funcionem em conjunto com as informações do banco de dados (autenticação JWT, estoque, etc...) é necessário estar com o servidor em funcionamento:
+
+   ```
+    flask run
+   ```
+
+- Após a instalação, vá para a pasta `frontend/register` e clique com o botão direito em `register.html` e selecione *Open with live server*, uma nova aba será aberta no seu navegador padrão. 
+
+### 2. Login 
+
+- Faça o Registro inserindo informações no formulário e selecione a Opção **GERENTE**.
+
+- Após Registrado, a tela redireciona para a página de Login, utilize as informações inseridas no registro!
+
+### 3. DashBoard
+
+- No momento, todas as opções do Dashboard estão funcionais, exceto a de vendas. Você pode adicionar produtos à venda e calcular o valor total, porém, a finalização do pagamento ainda não está totalmente implementada. Ao tentar concluir uma compra, a página será apenas atualizada sem realizar a transação completa. *(Funcionalidade a ser aprimorada em breve!)*
+
+### 4. Explore
+
+- Lembre-se que há diferentes tipos de relatórios! dedique um tempo neles, adicione informações no banco de dados e tente se divertir!
+
+
 ##  **Testes**
 
 - Os teste podem ser realizados utilizando o comando no terminal:
