@@ -1,4 +1,4 @@
-                    ## 📌 softMarket - Sistema de Supermercado  📌
+#  📌 softMarket - Sistema de Supermercado  📌
 
 Este é um projeto de sistema de supermercado, com foco na gestão de produtos, fornecedores e clientes. O sistema permitirá o gerenciamento de estoque, pedidos de fornecedores e vendas realizadas no supermercado.
 
@@ -267,7 +267,7 @@ http://127.0.0.1:5000/produto/<id>
 
 
 #### **GET/Relatorio**
-**Descrição:** Gera um novo relatório. (olhar diferentes opções de relatório em `softMarket-Project\app\controllers\relatórios.py`)
+**Descrição:** Gera um novo relatório. (diferentes opções de relatório em `softMarket-Project\app\controllers\relatórios.py`)
   
 - **Corpo da Requisição:**
 - No Postman, selecione o método GET e insira a URL da rota:
@@ -277,19 +277,8 @@ http://127.0.0.1:5000/produto/<id>
  ```
     
 - Não é necessário inserir nada no Body. 
-- Clique na seta ao lado de send **Send and Download** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
+- Clique na seta ao lado de send **Send and Download** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created e o arquivo na pasta de download!
 
-```
-  "message": "Cliente cadastrado com sucesso!"
-```
-
-- O Método Get é necessário colocar o `cliente` no plural.
-
-- o Método DELETE é necessário colocar o `id` do fornecedor cadastrado:
-
-```
-http://127.0.0.1:5000/cliente/<id>
-```
 
 #### **POST/pedidoEstoque**
 **Descrição:** Registra um novo pedido para Estoque.
@@ -336,11 +325,16 @@ http://127.0.0.1:5000/cliente/<id>
 - Cole o seguinte corpo da requisição:
     
 ```
-    {
-        "cliente_id": 1,
-        "data":"2025-02-20",
-        "total": 22.80
-    }
+{
+    "itens": [
+        {"produto_id": 1, "quantidade": 2, "preco_unitario": 10.0},
+        {"produto_id": 2, "quantidade": 3, "preco_unitario": 20.0}
+    ],
+    "data": "2025-03-18T10:00:00",
+    "total": 80.0,
+    "forma_pagamento": "pix"
+}
+
 ```
 
 - Clique em **Send** para verificar a resposta. Com o sucesso você deve receber uma resposta com 201 Created:
@@ -351,3 +345,84 @@ http://127.0.0.1:5000/cliente/<id>
 
 - **IMPORTANTE: a compra só pode ser cadastrada se um cliente  estiver cadastrado, devido as restrições de chave no Banco de Dados (Não existe produto vendido sem comprador!)**
 
+##  **Testes**
+
+- Os teste podem ser realizados utilizando o comando no terminal:
+
+```
+  pytest .\tests\
+```
+
+isso iniciará todos os testes na pasta test. Caso queira um teste em específico, basta adiciona-lo em seguida: `pytest .\tests\test_compra.py` por exemplo!
+
+
+## ⏭️ Próximos Passos
+
+
+- ### **Função de Logout na API**  
+  
+  A adição de um endpoint para permitir que o usuário se deslogue, invalidando o token JWT e garantindo que o usuário não possa mais acessar as rotas protegidas sem se autenticar novamente.
+
+- ### **Função de Renovação de Token (Refresh Token)**
+  
+  Adicionar suporte a refresh tokens para permitir que os usuários renovem seus tokens JWT sem precisar se autenticar novamente. O sistema de refresh token pode ser usado para aumentar a segurança e melhorar a experiência do usuário.
+
+- ### **Pagamentos**
+  
+  Integração com sistemas de pagamento online (ex.: PIX, cartão de crédito).
+
+- ### **Ajustes e Refinamentos**
+  
+  Mensagens de erro e feedback mais amigáveis para o usuário.
+
+- ### **Autenticação e Autorização Completa**
+
+  Restringir funcionalidades de acordo com o perfil do usuário (ex.: caixa, gerente).
+
+- ### **Controle de Estoque e Pedidos de Estoque**
+
+  Alertas de estoque baixo e vencimento de produtos.
+
+  Função para realizar pedidos de reposição automática ou manual.
+  
+- ### **Funcionalidades Adicionais para Valor Comercial**
+
+  #### *Relatórios Avançados:*
+  
+   Relatório financeiro com resumo mensal (lucro, despesas, faturamento).
+  
+   Relatórios comparativos (ex.: vendas de hoje vs. ontem, mês atual vs. mês anterior).
+
+  #### *Promoções e Descontos:*
+    
+   Função para aplicar promoções automaticamente.
+  
+   Criar campanhas de desconto para clientes frequentes.
+
+- ### **Cadastro e Fidelização de Clientes**
+
+  Registro de clientes com histórico de compras.
+  
+  Sistema de pontos ou cashback.
+
+- ### **Backup e Recuperação de Dados**
+
+  Criar função de backup automático (semanal/mensal).
+  
+  Testar recuperação de dados para evitar perda acidental.
+
+- ### **Melhorias Visuais e Experiência do Usuário (Frontend)**
+  
+  #### *Relatórios Avançados:*
+
+  Indicadores visuais de desempenho (ex.: gráficos interativos).
+  
+  Notificações de sistema (ex.: alerta de estoque baixo).
+  
+  Animações suaves e responsividade para dispositivos móveis.
+
+  #### *Feedback Visual e UX:*
+
+  Adicionar efeitos de carregamento e transições suaves.
+  
+  Validação em tempo real nos formulários.
