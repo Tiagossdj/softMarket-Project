@@ -9,9 +9,12 @@ def test_realiza_compra_sucesso(client):
             {"produto_id": 2, "quantidade": 3, "preco_unitario": 20.0},
         ],
         "data": "2025-03-18T10:00:00",
-        "total": 80.0,  # Total da compra
+        "total": 80.0,
         "forma_pagamento": "pix",
     }
+
+    # Print para debug
+    print(compra_data)
 
     # Realizar a requisição POST para criar a compra
     response = client.post("/realizaCompra", json=compra_data)

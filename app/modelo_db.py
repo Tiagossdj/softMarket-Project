@@ -40,7 +40,7 @@ class Compra(db.Model):
     forma_pagamento = db.Column(db.String(50))
 
     # Relacionamento <reverso> para acessar os itens da compra
-    itens = db.relationship("ItemCompra", back_populates="compra")
+    itens = db.relationship("ItemCompra", back_populates="compra", lazy="joined")
 
 
 from datetime import datetime

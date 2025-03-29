@@ -4,6 +4,7 @@ from app.modelo_db import Compra, Fornecedor, ItemCompra, PedidoEstoque, Produto
 import pandas as pd
 from app.utils.gerar_excel import gerar_excel
 from sqlalchemy.orm import joinedload
+import logging
 
 
 relatorio_route = Blueprint("relatorio", __name__)
@@ -143,27 +144,43 @@ def relatorio_estoque_excel():
         return jsonify({"error": str(e)}), 500
 
 
-# Relatório de vendas do dia: exibir todas as vendas do dia atual, com detalhes
+# endpoint para gerar o relatório de vendas do dia em Excel
 @relatorio_route.route("/relatorio_vendas_dia_excel", methods=["GET"])
 def relatorio_vendas_dia_excel():
     try:
-        data_str = request.args.get("data")
+        # Pega a data enviada na requisição, agora usando data_inicio
+        data_str = request.args.get("data_inicio")
+
         if data_str:
             try:
-                data_filtro = datetime.strptime(data_str, "%Y-%m-%d").date()
+                # Mudança no formato de parsing para DD-MM-YYYY
+                data_filtro = datetime.strptime(data_str, "%d-%m-%Y").date()
             except ValueError:
                 return (
-                    jsonify({"error": "Formato de data inválido. Use YYYY-MM-DD."}),
+                    jsonify({"error": "Formato de data inválido. Use DD-MM-YYYY."}),
                     400,
                 )
         else:
             data_filtro = date.today()
 
-        vendas = Compra.query.filter(db.func.date(Compra.data) == data_filtro).all()
+        logging.debug(f"Filtrando vendas para a data: {data_filtro}")
+
+        # Mantém a mesma lógica de consulta
+        vendas = (
+            Compra.query.filter(db.func.date(Compra.data) == data_filtro)
+            .options(joinedload(Compra.itens))  # Para carregar os itens da compra
+            .all()
+        )
+
+        logging.debug(f"Total de vendas encontradas: {len(vendas)}")
 
         dados = []
         for venda in vendas:
+            logging.debug(f"Processando venda ID: {venda.id}")
             for item in venda.itens:
+                logging.debug(
+                    f"Item: {item.produto.nome}, Quantidade: {item.quantidade}"
+                )
                 dados.append(
                     {
                         "ID Venda": venda.id,
@@ -176,12 +193,24 @@ def relatorio_vendas_dia_excel():
                     }
                 )
 
+        logging.debug(f"Total de itens de venda: {len(dados)}")
+
+        # Verifica se há dados antes de criar o DataFrame
+        if not dados:
+            logging.warning("Nenhum dado encontrado para a data especificada")
+            return jsonify({"message": "Sem vendas para a data selecionada"}), 404
+
+        # Converte os dados para um DataFrame
         df = pd.DataFrame(dados)
-        return gerar_excel(
-            df, nome_arquivo="relatorio_vendas_dia.xlsx", nome_planilha="Vendas do Dia"
-        )
+
+        # Chama a função para gerar e retornar o arquivo Excel
+        arquivo_excel = gerar_excel(df, "relatorio_vendas_dia.xlsx", "Vendas do Dia")
+
+        # Retorna o arquivo como resposta para download
+        return arquivo_excel
 
     except Exception as e:
+        logging.error(f"Erro ao gerar relatório: {str(e)}", exc_info=True)
         return jsonify({"error": str(e)}), 500
 
 
@@ -269,16 +298,6 @@ def relatorio_pedidos_estoque_excel():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
-from datetime import date, datetime
-from flask import Blueprint, request, jsonify
-from app.modelo_db import Compra, Fornecedor, ItemCompra, PedidoEstoque, Produto, db
-import pandas as pd
-from app.utils.gerar_excel import gerar_excel
-from sqlalchemy.orm import joinedload
-
-relatorio_route = Blueprint("relatorio", __name__)
 
 
 # Novo endpoint JSON para vendas do dia

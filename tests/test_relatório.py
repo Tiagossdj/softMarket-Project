@@ -123,9 +123,9 @@ def test_relatorio_estoque_excel(client):
 
 @pytest.mark.compra
 def test_relatorio_vendas_dia_excel(client):
-    # Criando vendas do dia de teste
     with client.application.app_context():
         from app.modelo_db import Compra, Produto, ItemCompra
+        from datetime import datetime
 
         produto = Produto(
             nome="Produto Teste",
@@ -137,7 +137,8 @@ def test_relatorio_vendas_dia_excel(client):
         db.session.add(produto)
         db.session.commit()
 
-        venda = Compra(total=150.0, data=datetime(2025, 3, 19, 16, 0))
+        data_teste = datetime(2025, 3, 19, 16, 0)
+        venda = Compra(total=150.0, data=data_teste)
         db.session.add(venda)
         db.session.commit()
 
@@ -151,12 +152,17 @@ def test_relatorio_vendas_dia_excel(client):
         db.session.add(item_compra)
         db.session.commit()
 
-    # Realizando a requisição para vendas do dia
-    response = client.get("/relatorio_vendas_dia_excel?data=2025-03-19")
+        data_param = data_teste.strftime("%d-%m-%Y")
 
-    # Verificando a resposta
-    assert response.status_code == 200
-    assert "relatorio_vendas_dia.xlsx" in response.headers["Content-Disposition"]
+        # Testando a rota com a data criada
+        response = client.get(f"/relatorio_vendas_dia_excel?data_inicio={data_param}")
+
+        # Verificando se a resposta é bem-sucedida e retorna um arquivo Excel
+        assert response.status_code == 200
+        assert (
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            in response.content_type
+        )
 
 
 @pytest.mark.estoque
